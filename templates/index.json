@@ -33,7 +33,7 @@
         },
         "cat-5": {
           "type": "category",
-          "settings": { "icon": "🖱️", "label": "Deskmats", "link": "/collections/deskmats" }
+          "settings": { "icon": "🖱️", "label": "Mousepads", "link": "/collections/mousepads" }
         },
         "cat-6": {
           "type": "category",
