@@ -517,32 +517,42 @@ h4 { font-size: 1.125rem; }
   background-color: var(--color-bg-secondary);
 }
 
-.hero-banner__bg {
+.hero-banner__mosaic {
   position: absolute;
   inset: 0;
   z-index: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 3px;
+  overflow: hidden;
 }
-.hero-banner__bg img {
+.hero-banner__mosaic-item {
+  overflow: hidden;
+}
+.hero-banner__mosaic-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  filter: saturate(0.7) brightness(0.55);
+  transition: none;
 }
-.hero-banner__bg::after {
-  content: '';
+
+.hero-banner__overlay {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: linear-gradient(
     105deg,
-    rgba(15,25,35,0.92) 0%,
-    rgba(15,25,35,0.65) 50%,
-    rgba(15,25,35,0.15) 100%
+    rgba(15,25,35,0.88) 0%,
+    rgba(15,25,35,0.60) 55%,
+    rgba(15,25,35,0.30) 100%
   );
 }
 
 .hero-banner__content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 620px;
 }
 

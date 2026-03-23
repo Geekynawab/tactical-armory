@@ -1,16 +1,22 @@
 <section class="hero-banner" id="hero-banner-{{ section.id }}">
-  <!-- Background image -->
-  <div class="hero-banner__bg">
-    {%- if section.settings.bg_image != blank -%}
-      <img
-        src="{{ section.settings.bg_image | image_url: width: 1600 }}"
-        alt="{{ section.settings.heading | escape }}"
-        loading="eager"
-        fetchpriority="high"
-        width="1600"
-        height="900">
-    {%- endif -%}
+  <!-- Product mosaic background -->
+  <div class="hero-banner__mosaic" aria-hidden="true">
+    {%- assign all_products = collections.all.products -%}
+    {%- for product in all_products limit: 24 -%}
+      {%- if product.featured_image != blank -%}
+        <div class="hero-banner__mosaic-item">
+          <img
+            src="{{ product.featured_image | image_url: width: 400 }}"
+            alt=""
+            loading="{%- if forloop.index <= 6 -%}eager{%- else -%}lazy{%- endif -%}"
+            width="400"
+            height="400">
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
   </div>
+  <!-- Dark overlay -->
+  <div class="hero-banner__overlay"></div>
 
   <div class="container">
     <div class="hero-banner__content">
