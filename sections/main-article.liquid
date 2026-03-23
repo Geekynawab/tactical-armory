@@ -1,0 +1,75 @@
+<div class="section">
+  <div class="container" style="max-width:780px">
+
+    <div style="margin-bottom:2rem">
+      <a href="{{ blog.url }}" style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent)">
+        ← {{ blog.title }}
+      </a>
+    </div>
+
+    {%- if article.image -%}
+      <div style="aspect-ratio:16/9;overflow:hidden;margin-bottom:2rem;border:1px solid var(--color-border)">
+        <img
+          src="{{ article.image | image_url: width: 1200 }}"
+          alt="{{ article.image.alt | default: article.title | escape }}"
+          style="width:100%;height:100%;object-fit:cover"
+          loading="eager">
+      </div>
+    {%- endif -%}
+
+    {%- if article.tags.size > 0 -%}
+      <p style="font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-accent);margin-bottom:0.75rem">
+        {{ article.tags | join: ' · ' }}
+      </p>
+    {%- endif -%}
+
+    <h1 style="margin-bottom:1rem">{{ article.title }}</h1>
+
+    <p style="font-size:0.8rem;color:var(--color-text-muted);margin-bottom:2rem">
+      {{ 'blogs.article.by_author' | t: author: article.author }}
+      · {{ article.published_at | date: '%B %d, %Y' }}
+    </p>
+
+    <div class="product-info__description" style="font-size:0.95rem">
+      {{ article.content }}
+    </div>
+
+    {%- if blog.comments_enabled? -%}
+      <hr style="border:none;border-top:1px solid var(--color-border);margin:3rem 0">
+      <div id="comments">
+        {%- if article.comments_count > 0 -%}
+          <h2 style="font-size:1rem;letter-spacing:0.08em;margin-bottom:1.5rem">{{ article.comments_count }} Comments</h2>
+          {%- for comment in article.comments -%}
+            <div style="padding:1rem 0;border-bottom:1px solid var(--color-border)">
+              <p style="font-size:0.75rem;color:var(--color-text-muted);margin-bottom:0.5rem">
+                {{ comment.author }} · {{ comment.created_at | date: '%B %d, %Y' }}
+              </p>
+              <p style="font-size:0.9rem;color:var(--color-text-secondary)">{{ comment.content }}</p>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+
+        {% form 'new_comment', article %}
+          <h3 style="font-size:0.9rem;letter-spacing:0.08em;margin:2rem 0 1rem">Leave a Comment</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+            <input type="text" name="comment[author]" placeholder="Name" required
+              style="background:var(--color-bg-card);border:1px solid var(--color-border);color:var(--color-text-primary);padding:0.65rem 0.75rem;font-size:0.85rem;outline:none">
+            <input type="email" name="comment[email]" placeholder="Email" required
+              style="background:var(--color-bg-card);border:1px solid var(--color-border);color:var(--color-text-primary);padding:0.65rem 0.75rem;font-size:0.85rem;outline:none">
+          </div>
+          <textarea name="comment[body]" rows="4" placeholder="Your comment" required
+            style="width:100%;background:var(--color-bg-card);border:1px solid var(--color-border);color:var(--color-text-primary);padding:0.65rem 0.75rem;font-size:0.85rem;resize:vertical;outline:none;margin-bottom:1rem"></textarea>
+          <button type="submit" class="btn btn--primary">Post Comment</button>
+        {% endform %}
+      </div>
+    {%- endif -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": []
+}
+{% endschema %}

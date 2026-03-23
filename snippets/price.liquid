@@ -1,0 +1,19 @@
+{%- liquid
+  assign target = product | default: variant
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price | default: 1999
+  assign available = target.available | default: true
+-%}
+
+{%- if available == false -%}
+  <span class="text-muted">{{ 'products.product.sold_out' | t }}</span>
+{%- elsif compare_at_price > price -%}
+  <span class="sale">{{ price | money }}</span>
+  <span class="compare-at">{{ compare_at_price | money }}</span>
+{%- else -%}
+  {%- if target.price_varies -%}
+    <span>{{ 'products.product.from_price_html' | t: price: price | money }}</span>
+  {%- else -%}
+    <span>{{ price | money }}</span>
+  {%- endif -%}
+{%- endif -%}

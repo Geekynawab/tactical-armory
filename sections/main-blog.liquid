@@ -1,0 +1,64 @@
+<div class="section">
+  <div class="container">
+
+    <div style="margin-bottom:2.5rem">
+      <p class="section-subtitle">{{ blog.title }}</p>
+      <h1 class="section-title">Latest Articles</h1>
+      <span class="section-divider"></span>
+    </div>
+
+    {%- paginate blog.articles by 9 -%}
+      <div class="grid grid--3">
+        {%- for article in blog.articles -%}
+          <article class="article-card">
+            {%- if article.image -%}
+              <a href="{{ article.url }}" class="article-card__image">
+                <img
+                  src="{{ article.image | image_url: width: 640 }}"
+                  alt="{{ article.image.alt | default: article.title | escape }}"
+                  width="640"
+                  height="360"
+                  loading="lazy">
+              </a>
+            {%- endif -%}
+            <div class="article-card__body">
+              {%- if article.tags.size > 0 -%}
+                <p class="article-card__tag">{{ article.tags.first }}</p>
+              {%- endif -%}
+              <h2 class="article-card__title">
+                <a href="{{ article.url }}">{{ article.title }}</a>
+              </h2>
+              {%- if article.excerpt != blank -%}
+                <p class="article-card__excerpt">{{ article.excerpt | strip_html | truncate: 120 }}</p>
+              {%- endif -%}
+              <div style="margin-top:1rem">
+                <a href="{{ article.url }}" class="btn btn--outline btn--sm">{{ 'blogs.article.read_more' | t }}</a>
+              </div>
+            </div>
+          </article>
+        {%- else -%}
+          <p class="text-muted" style="grid-column:1/-1">No articles yet.</p>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <div style="display:flex;justify-content:center;gap:0.5rem;margin-top:3rem">
+          {%- if paginate.previous -%}
+            <a href="{{ paginate.previous.url }}" class="btn btn--ghost btn--sm">← Previous</a>
+          {%- endif -%}
+          {%- if paginate.next -%}
+            <a href="{{ paginate.next.url }}" class="btn btn--ghost btn--sm">Next →</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": []
+}
+{% endschema %}

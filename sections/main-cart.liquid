@@ -1,0 +1,98 @@
+<div class="section">
+  <div class="container" style="max-width:900px">
+
+    <h1 class="section-title" style="margin-bottom:2rem">{{ 'cart.general.title' | t }}</h1>
+
+    {%- if cart.item_count > 0 -%}
+      {% form 'cart', cart %}
+
+        <div style="display:grid;grid-template-columns:1fr 340px;gap:2rem;align-items:start">
+
+          <!-- Cart items -->
+          <div>
+            {%- for item in cart.items -%}
+              <div class="cart-item" style="padding:1.25rem 0">
+                <a href="{{ item.url }}">
+                  <img
+                    class="cart-item__image"
+                    src="{{ item.image | image_url: width: 160 }}"
+                    alt="{{ item.title | escape }}"
+                    width="80"
+                    height="80">
+                </a>
+                <div class="cart-item__info">
+                  <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title }}</a>
+                  {%- if item.variant.title != 'Default Title' -%}
+                    <p class="cart-item__variant">{{ item.variant.title }}</p>
+                  {%- endif -%}
+                  <div class="cart-item__bottom">
+                    <div class="qty-selector">
+                      <button type="button" onclick="var i=document.getElementById('qty-{{ item.index }}');i.value=Math.max(0,+i.value-1);i.form.submit()">−</button>
+                      <input
+                        id="qty-{{ item.index }}"
+                        type="number"
+                        name="updates[{{ item.key }}]"
+                        value="{{ item.quantity }}"
+                        min="0"
+                        max="99"
+                        style="width:40px;text-align:center;background:transparent;border:none;color:var(--color-text-primary);font-weight:700">
+                      <button type="button" onclick="var i=document.getElementById('qty-{{ item.index }}');i.value=Math.min(99,+i.value+1);i.form.submit()">+</button>
+                    </div>
+                    <span style="font-weight:700">{{ item.line_price | money }}</span>
+                  </div>
+                  <a href="{{ item.url_to_remove }}" class="cart-item__remove">{{ 'cart.general.remove' | t }}</a>
+                </div>
+              </div>
+            {%- endfor -%}
+
+            <div style="margin-top:1rem">
+              <label for="cart-note" class="variant-label">{{ 'cart.general.note' | t }}</label>
+              <textarea
+                id="cart-note"
+                name="note"
+                rows="3"
+                style="width:100%;background:var(--color-bg-card);border:1px solid var(--color-border);color:var(--color-text-primary);padding:0.75rem;font-size:0.85rem;resize:vertical;outline:none;margin-top:0.5rem">{{ cart.note }}</textarea>
+            </div>
+          </div>
+
+          <!-- Order summary -->
+          <div style="background:var(--color-bg-secondary);border:1px solid var(--color-border);padding:1.5rem;position:sticky;top:80px">
+            <h2 style="font-size:0.9rem;letter-spacing:0.1em;margin-bottom:1.25rem">Order Summary</h2>
+
+            <div style="display:flex;justify-content:space-between;margin-bottom:1rem;font-size:0.88rem;color:var(--color-text-secondary)">
+              <span>Subtotal</span>
+              <span style="color:var(--color-text-primary);font-weight:700">{{ cart.total_price | money }}</span>
+            </div>
+
+            <p style="font-size:0.75rem;color:var(--color-text-muted);margin-bottom:1.25rem">
+              {{ 'cart.general.taxes_and_shipping_policy_at_checkout_html' | t }}
+            </p>
+
+            <button type="submit" name="checkout" class="btn btn--primary btn--full">
+              {{ 'cart.general.checkout' | t }}
+            </button>
+
+            <a href="/collections/all" class="btn btn--ghost btn--full" style="margin-top:0.5rem">
+              {{ 'cart.general.continue_browsing' | t }}
+            </a>
+          </div>
+
+        </div>
+      {% endform %}
+
+    {%- else -%}
+      <div style="text-align:center;padding:4rem 0">
+        <p style="color:var(--color-text-muted);margin-bottom:1.5rem">{{ 'cart.general.empty' | t }}</p>
+        <a href="/collections/all" class="btn btn--primary">Browse Products</a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": []
+}
+{% endschema %}

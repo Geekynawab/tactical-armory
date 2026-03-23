@@ -1,0 +1,212 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Valorant Merch Theme",
+    "theme_version": "1.0.0",
+    "theme_author": "Custom",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_bg_primary",
+        "label": "Background — Primary",
+        "default": "#0F1923"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_secondary",
+        "label": "Background — Secondary",
+        "default": "#1C2A38"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_card",
+        "label": "Background — Cards",
+        "default": "#253240"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent — Primary (Valorant Red)",
+        "default": "#FF4655"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_hover",
+        "label": "Accent — Hover State",
+        "default": "#BD3944"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_teal",
+        "label": "Accent — Teal Highlight",
+        "default": "#00FFC2"
+      },
+      {
+        "type": "color",
+        "id": "color_text_primary",
+        "label": "Text — Primary",
+        "default": "#ECE8E1"
+      },
+      {
+        "type": "color",
+        "id": "color_text_secondary",
+        "label": "Text — Secondary",
+        "default": "#8B978F"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Border Color",
+        "default": "#2A3A48"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "label": "Headings font",
+        "default": "dm_sans_n7"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Body font",
+        "default": "inter_n4"
+      },
+      {
+        "type": "range",
+        "id": "type_base_size",
+        "label": "Base font size (px)",
+        "min": 14,
+        "max": 18,
+        "step": 1,
+        "default": 16
+      }
+    ]
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo width (px)",
+        "min": 50,
+        "max": 240,
+        "step": 5,
+        "default": 140
+      },
+      {
+        "type": "text",
+        "id": "logo_text",
+        "label": "Logo text (if no image)",
+        "default": "VALORANT MERCH"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_discord",
+        "label": "Discord invite URL"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok",
+        "label": "TikTok URL"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter",
+        "label": "Twitter / X URL"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube",
+        "label": "YouTube URL"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart type",
+        "options": [
+          { "value": "drawer", "label": "Drawer (slide-in)" },
+          { "value": "page", "label": "Page" }
+        ],
+        "default": "drawer"
+      }
+    ]
+  },
+  {
+    "name": "Age Verification",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "age_verify_enabled",
+        "label": "Enable age verification gate",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "age_verify_minimum",
+        "label": "Minimum age",
+        "min": 16,
+        "max": 21,
+        "step": 1,
+        "default": 18
+      }
+    ]
+  },
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "richtext",
+        "id": "footer_description",
+        "label": "Brand description",
+        "default": "<p>Premium Valorant-inspired merchandise. Physical replicas of your favorite in-game skins, crafted for real-world carry.</p>"
+      },
+      {
+        "type": "text",
+        "id": "footer_disclaimer",
+        "label": "Legal disclaimer",
+        "default": "Not affiliated with or endorsed by Riot Games or VALORANT™. All product designs are fan-made merchandise."
+      }
+    ]
+  }
+]

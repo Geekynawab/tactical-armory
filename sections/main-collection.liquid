@@ -1,0 +1,78 @@
+<!-- Collection header -->
+<div class="collection-header">
+  <div class="container">
+    {%- if collection.image -%}
+      <div style="position:relative;overflow:hidden;max-height:240px;margin-bottom:1.5rem">
+        <img src="{{ collection.image | image_url: width: 1400 }}" alt="{{ collection.title | escape }}" style="width:100%;height:240px;object-fit:cover;opacity:0.6">
+        <div style="position:absolute;inset:0;background:linear-gradient(transparent,var(--color-bg-primary))"></div>
+      </div>
+    {%- endif -%}
+    <h1 class="collection-header__title">{{ collection.title }}</h1>
+    <p class="collection-header__count">
+      {{ collection.products_count }}
+      {{ 'collections.general.items_with_count_other' | t: count: collection.products_count }}
+    </p>
+    {%- if collection.description != blank -%}
+      <p style="color:var(--color-text-secondary);font-size:0.88rem;margin-top:0.5rem;max-width:640px">{{ collection.description }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+<div class="section">
+  <div class="container">
+
+    <!-- Toolbar -->
+    <div class="collection-toolbar">
+      <p class="text-muted" style="font-size:0.82rem">
+        Showing {{ paginate.current_offset | plus: 1 }}–{{ paginate.current_offset | plus: paginate.page_size | at_most: collection.products_count }} of {{ collection.products_count }} products
+      </p>
+      <div class="collection-sort">
+        <select aria-label="Sort by">
+          <option value="manual" {% if collection.sort_by == 'manual' %}selected{% endif %}>{{ 'collections.sorting.manual' | t }}</option>
+          <option value="best-selling" {% if collection.sort_by == 'best-selling' %}selected{% endif %}>{{ 'collections.sorting.best_selling' | t }}</option>
+          <option value="title-ascending" {% if collection.sort_by == 'title-ascending' %}selected{% endif %}>{{ 'collections.sorting.title_ascending' | t }}</option>
+          <option value="title-descending" {% if collection.sort_by == 'title-descending' %}selected{% endif %}>{{ 'collections.sorting.title_descending' | t }}</option>
+          <option value="price-ascending" {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>{{ 'collections.sorting.price_ascending' | t }}</option>
+          <option value="price-descending" {% if collection.sort_by == 'price-descending' %}selected{% endif %}>{{ 'collections.sorting.price_descending' | t }}</option>
+          <option value="created-descending" {% if collection.sort_by == 'created-descending' %}selected{% endif %}>{{ 'collections.sorting.created_descending' | t }}</option>
+        </select>
+      </div>
+    </div>
+
+    {%- paginate collection.products by 24 -%}
+      <div class="product-grid">
+        {%- for product in collection.products -%}
+          {% render 'product-card', product: product %}
+        {%- else -%}
+          <p class="text-muted" style="grid-column:1/-1;text-align:center;padding:3rem 0">No products found in this collection.</p>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <div style="display:flex;justify-content:center;gap:0.5rem;margin-top:3rem">
+          {%- if paginate.previous -%}
+            <a href="{{ paginate.previous.url }}" class="btn btn--ghost btn--sm">← {{ 'general.pagination.previous' | t }}</a>
+          {%- endif -%}
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}
+              <a href="{{ part.url }}" class="btn btn--ghost btn--sm">{{ part.title }}</a>
+            {%- else -%}
+              <span class="btn btn--primary btn--sm" aria-current="page">{{ part.title }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if paginate.next -%}
+            <a href="{{ paginate.next.url }}" class="btn btn--ghost btn--sm">{{ 'general.pagination.next' | t }} →</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": []
+}
+{% endschema %}

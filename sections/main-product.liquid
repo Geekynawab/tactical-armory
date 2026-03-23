@@ -1,0 +1,139 @@
+<div class="product-page">
+  <div class="container">
+    <div class="product-page__grid">
+
+      <!-- Gallery -->
+      <div class="product-gallery">
+        <div class="product-gallery__main">
+          {%- if product.featured_image != blank -%}
+            <img
+              id="gallery-main-img"
+              src="{{ product.featured_image | image_url: width: 800 }}"
+              alt="{{ product.featured_image.alt | default: product.title | escape }}"
+              loading="eager"
+              width="800"
+              height="800">
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'product-gallery__main' }}
+          {%- endif -%}
+        </div>
+
+        {%- if product.images.size > 1 -%}
+          <div class="product-gallery__thumbs">
+            {%- for image in product.images limit: 5 -%}
+              <button
+                class="product-gallery__thumb {% if forloop.first %}active{% endif %}"
+                data-src="{{ image | image_url: width: 800 }}"
+                aria-label="View image {{ forloop.index }}">
+                <img
+                  src="{{ image | image_url: width: 120 }}"
+                  alt="{{ image.alt | default: product.title | escape }}"
+                  width="120"
+                  height="120"
+                  loading="lazy">
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Info -->
+      <div class="product-info">
+
+        {%- if product.vendor != blank -%}
+          <p class="product-info__collection">{{ product.vendor }}</p>
+        {%- endif -%}
+
+        <h1 class="product-info__title">{{ product.title }}</h1>
+
+        <div class="product-info__price">
+          {% render 'price', product: product %}
+        </div>
+
+        <hr class="product-info__divider">
+
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <div class="variant-group" data-variant-group="option{{ forloop.index }}">
+              <p class="variant-label">{{ option.name }}</p>
+              <div class="variant-buttons">
+                {%- for value in option.values -%}
+                  <button
+                    class="variant-btn {% if option.selected_value == value %}active{% endif %}"
+                    data-option-value="{{ value | escape }}"
+                    data-option-index="{{ forloop.parentloop.index0 }}">
+                    {{ value }}
+                  </button>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endunless -%}
+
+        <!-- Add to cart form -->
+        {% form 'product', product, data-add-to-cart-form: '' %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+          <div class="product-info__add-to-cart">
+            <div class="product-info__qty">
+              <button type="button" onclick="var i=this.nextElementSibling;i.value=Math.max(1,+i.value-1)">−</button>
+              <input type="number" name="quantity" value="1" min="1" max="99" aria-label="Quantity">
+              <button type="button" onclick="var i=this.previousElementSibling;i.value=Math.min(99,+i.value+1)">+</button>
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn--primary"
+              style="flex:1"
+              {%- unless product.available %} disabled{%- endunless -%}>
+              {%- if product.available -%}
+                {{ 'products.product.add_to_cart' | t }}
+              {%- else -%}
+                {{ 'products.product.sold_out' | t }}
+              {%- endif -%}
+            </button>
+          </div>
+        {% endform %}
+
+        <!-- Trust badges -->
+        <div class="trust-badges">
+          <div class="trust-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+            Free shipping $50+
+          </div>
+          <div class="trust-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Secure checkout
+          </div>
+          <div class="trust-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+            30-day returns
+          </div>
+        </div>
+
+        <hr class="product-info__divider">
+
+        {%- if product.description != blank -%}
+          <div class="product-info__description">
+            {{ product.description }}
+          </div>
+        {%- endif -%}
+
+        <!-- Knife legal disclaimer -->
+        {%- if product.type == 'Knife' or product.type == 'Melee' or product.tags contains 'knife' -%}
+          <p style="margin-top:1.5rem;font-size:0.75rem;color:var(--color-text-muted);border-top:1px solid var(--color-border);padding-top:1rem">
+            ⚠️ Blade product: Must be 18+ to purchase. Check local laws before ordering. For collection/cosplay purposes only.
+          </p>
+        {%- endif -%}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": []
+}
+{% endschema %}

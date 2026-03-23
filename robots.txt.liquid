@@ -1,0 +1,29 @@
+{% if robots.default_groups %}
+  {% for group in robots.default_groups %}
+    {{- group.user_agent -}}
+    {% for rule in group.rules %}
+      {{- rule -}}
+    {% endfor %}
+    {% if group.sitemap %}
+      {{- group.sitemap -}}
+    {% endif %}
+  {% endfor %}
+{% else %}
+User-agent: *
+Disallow: /admin
+Disallow: /cart
+Disallow: /orders
+Disallow: /checkouts
+Disallow: /checkout
+Disallow: /cgi-bin
+Disallow: /account
+Disallow: /collections/*sort_by*
+Disallow: /blogs/*tagged*
+Disallow: /blogs/*author*
+Disallow: /search
+Disallow: /apple-app-site-association
+Disallow: /.well-known/shopify/monorail
+Allow: /
+
+Sitemap: {{ shop.url }}/sitemap.xml
+{% endif %}

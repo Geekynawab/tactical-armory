@@ -1,0 +1,78 @@
+{
+  "sections": {
+    "hero-banner": {
+      "type": "hero-banner",
+      "settings": {
+        "eyebrow": "New Collection",
+        "heading": "Your Favorite Skins, |IRL|",
+        "subtitle": "Premium physical replicas of Valorant's most iconic weapon skins. Crafted for real-world carry.",
+        "cta_label": "Shop All Skins",
+        "cta_link": "/collections/all",
+        "cta2_label": "Browse Collections",
+        "cta2_link": "/collections"
+      }
+    },
+    "collection-categories": {
+      "type": "collection-categories",
+      "blocks": {
+        "cat-1": {
+          "type": "category",
+          "settings": { "icon": "⚔️", "label": "Knives", "link": "/collections/knives" }
+        },
+        "cat-2": {
+          "type": "category",
+          "settings": { "icon": "🔫", "label": "Gun Models", "link": "/collections/gun-models" }
+        },
+        "cat-3": {
+          "type": "category",
+          "settings": { "icon": "🗝️", "label": "Keychains", "link": "/collections/keychains" }
+        },
+        "cat-4": {
+          "type": "category",
+          "settings": { "icon": "👕", "label": "Apparel", "link": "/collections/apparel" }
+        },
+        "cat-5": {
+          "type": "category",
+          "settings": { "icon": "🖱️", "label": "Deskmats", "link": "/collections/deskmats" }
+        },
+        "cat-6": {
+          "type": "category",
+          "settings": { "icon": "🏆", "label": "Collectibles", "link": "/collections/collectibles" }
+        },
+        "cat-7": {
+          "type": "category",
+          "settings": { "icon": "🎁", "label": "Bundles", "link": "/collections/bundles" }
+        },
+        "cat-8": {
+          "type": "category",
+          "settings": { "icon": "🏷️", "label": "Sale", "link": "/collections/sale" }
+        }
+      },
+      "block_order": ["cat-1","cat-2","cat-3","cat-4","cat-5","cat-6","cat-7","cat-8"]
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Top Picks",
+        "heading": "Featured Skins",
+        "products_to_show": 8,
+        "show_view_all": true
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Stay In The Loop",
+        "heading": "Get Early Access to New Drops",
+        "subtext": "New skins, exclusive deals, and Valorant content — straight to your inbox.",
+        "button_label": "Subscribe"
+      }
+    }
+  },
+  "order": [
+    "hero-banner",
+    "collection-categories",
+    "featured-collection",
+    "newsletter"
+  ]
+}

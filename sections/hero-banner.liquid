@@ -1,0 +1,119 @@
+<section class="hero-banner" id="hero-banner-{{ section.id }}">
+  <!-- Background image -->
+  <div class="hero-banner__bg">
+    {%- if section.settings.bg_image != blank -%}
+      <img
+        src="{{ section.settings.bg_image | image_url: width: 1600 }}"
+        alt="{{ section.settings.heading | escape }}"
+        loading="eager"
+        fetchpriority="high"
+        width="1600"
+        height="900">
+    {%- endif -%}
+  </div>
+
+  <div class="container">
+    <div class="hero-banner__content">
+
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="hero-banner__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h1 class="hero-banner__title">
+          {%- assign title_parts = section.settings.heading | split: '|' -%}
+          {%- if title_parts.size > 1 -%}
+            {{ title_parts[0] }}<em>{{ title_parts[1] }}</em>{{ title_parts[2] }}
+          {%- else -%}
+            {{ section.settings.heading }}
+          {%- endif -%}
+        </h1>
+      {%- endif -%}
+
+      {%- if section.settings.subtitle != blank -%}
+        <p class="hero-banner__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+
+      <div class="hero-banner__actions">
+        {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
+          <a href="{{ section.settings.cta_link }}" class="btn btn--primary">
+            {{ section.settings.cta_label }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.cta2_label != blank and section.settings.cta2_link != blank -%}
+          <a href="{{ section.settings.cta2_link }}" class="btn btn--ghost">
+            {{ section.settings.cta2_label }}
+          </a>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "tag": "section",
+  "class": "section-hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "New Collection"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading — use | to highlight a word",
+      "default": "Your Favorite Skins, |IRL|"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Premium physical replicas of Valorant's most iconic weapon skins. Crafted for real-world carry."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Primary button text",
+      "default": "Shop All Skins"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "cta2_label",
+      "label": "Secondary button text",
+      "default": "Browse Collections"
+    },
+    {
+      "type": "url",
+      "id": "cta2_link",
+      "label": "Secondary button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner",
+      "settings": {
+        "eyebrow": "New Collection",
+        "heading": "Your Favorite Skins, |IRL|",
+        "subtitle": "Premium physical replicas of Valorant's most iconic weapon skins. Crafted for real-world carry.",
+        "cta_label": "Shop All Skins",
+        "cta2_label": "Browse Collections"
+      }
+    }
+  ]
+}
+{% endschema %}

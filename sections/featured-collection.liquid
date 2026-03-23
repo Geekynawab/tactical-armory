@@ -1,0 +1,87 @@
+{%- liquid
+  assign collection = collections[section.settings.collection]
+  assign product_limit = section.settings.products_to_show | default: 8
+-%}
+
+{%- if collection != blank -%}
+<section class="section featured-collection">
+  <div class="container">
+
+    <div class="section-header">
+      <div class="section-header__title-wrap">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="section-subtitle">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 class="section-title">{{ section.settings.heading | default: collection.title }}</h2>
+        <span class="section-divider"></span>
+      </div>
+      {%- if section.settings.show_view_all -%}
+        <a href="{{ collection.url }}" class="btn btn--outline btn--sm">View All</a>
+      {%- endif -%}
+    </div>
+
+    <div class="product-grid">
+      {%- for product in collection.products limit: product_limit -%}
+        {% render 'product-card', product: product %}
+      {%- else -%}
+        {%- for i in (1..product_limit) -%}
+          {% render 'product-card', placeholder: true, forloop_index: forloop.index %}
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Top Picks"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "Featured Skins"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 4,
+      "max": 12,
+      "step": 4,
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View all' button",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection",
+      "settings": {
+        "eyebrow": "Top Picks",
+        "heading": "Featured Skins",
+        "products_to_show": 8,
+        "show_view_all": true
+      }
+    }
+  ]
+}
+{% endschema %}

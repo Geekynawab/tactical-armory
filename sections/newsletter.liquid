@@ -1,0 +1,83 @@
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-inner">
+
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="section-subtitle">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      <h2 class="section-title">{{ section.settings.heading }}</h2>
+      {%- if section.settings.subtext != blank -%}
+        <p style="color:var(--color-text-secondary);font-size:0.9rem;margin-top:0.5rem">{{ section.settings.subtext }}</p>
+      {%- endif -%}
+
+      {% form 'customer', class: 'newsletter-form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+
+        <input
+          type="email"
+          name="contact[email]"
+          id="newsletter-email-{{ section.id }}"
+          placeholder="{{ 'newsletter.placeholder' | t }}"
+          aria-label="{{ 'newsletter.label' | t }}"
+          required
+          autocomplete="email">
+
+        <button type="submit" class="btn btn--primary">
+          {{ section.settings.button_label | default: 'Subscribe' }}
+        </button>
+
+        {%- if form.posted_successfully? -%}
+          <p class="text-teal" style="margin-top:0.75rem;font-size:0.85rem">
+            {{ 'newsletter.success' | t }}
+          </p>
+        {%- endif -%}
+      {% endform %}
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Stay In The Loop"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Get Early Access to New Drops"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "New skins, exclusive deals, and Valorant content — straight to your inbox."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button text",
+      "default": "Subscribe"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter",
+      "settings": {
+        "eyebrow": "Stay In The Loop",
+        "heading": "Get Early Access to New Drops",
+        "subtext": "New skins, exclusive deals, and Valorant content — straight to your inbox.",
+        "button_label": "Subscribe"
+      }
+    }
+  ]
+}
+{% endschema %}

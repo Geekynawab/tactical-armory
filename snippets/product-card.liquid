@@ -1,0 +1,74 @@
+{%- liquid
+  assign show_vendor = show_vendor | default: false
+  assign show_quick_add = show_quick_add | default: true
+  assign first_variant = product.selected_or_first_available_variant
+-%}
+
+{%- if placeholder == true -%}
+  <div class="product-card">
+    <div class="product-card__media">
+      {{ 'product-' | append: forloop_index | placeholder_svg_tag }}
+    </div>
+    <div class="product-card__info">
+      <p class="product-card__collection">Collection</p>
+      <h3 class="product-card__title">Product Name</h3>
+      <div class="product-card__price">$29.99</div>
+    </div>
+  </div>
+{%- else -%}
+  <article class="product-card">
+    <a href="{{ product.url }}" class="product-card__media" aria-label="{{ product.title | escape }}">
+
+      {%- if product.featured_image != blank -%}
+        <img
+          src="{{ product.featured_image | image_url: width: 600 }}"
+          alt="{{ product.featured_image.alt | default: product.title | escape }}"
+          loading="lazy"
+          width="600"
+          height="600">
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag }}
+      {%- endif -%}
+
+      <!-- Badges -->
+      <div class="product-card__badges">
+        {%- if product.available == false -%}
+          <span class="badge badge--sold-out">Sold Out</span>
+        {%- elsif product.compare_at_price > product.price -%}
+          <span class="badge badge--sale">Sale</span>
+        {%- endif -%}
+        {%- if product.tags contains 'new' -%}
+          <span class="badge badge--new">New</span>
+        {%- endif -%}
+      </div>
+
+      <!-- Quick add -->
+      {%- if show_quick_add and product.available -%}
+        <div class="product-card__quick-add">
+          <button
+            class="btn btn--primary btn--sm btn--full"
+            data-quick-add="{{ first_variant.id }}"
+            aria-label="Quick add {{ product.title | escape }}">
+            Quick Add
+          </button>
+        </div>
+      {%- endif -%}
+    </a>
+
+    <div class="product-card__info">
+      {%- if show_vendor and product.vendor != blank -%}
+        <p class="product-card__collection">{{ product.vendor }}</p>
+      {%- elsif product.type != blank -%}
+        <p class="product-card__collection">{{ product.type }}</p>
+      {%- endif -%}
+
+      <h3 class="product-card__title">
+        <a href="{{ product.url }}">{{ product.title }}</a>
+      </h3>
+
+      <div class="product-card__price">
+        {% render 'price', product: product %}
+      </div>
+    </div>
+  </article>
+{%- endif -%}

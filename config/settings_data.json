@@ -1,0 +1,22 @@
+{
+  "current": {
+    "color_bg_primary": "#0F1923",
+    "color_bg_secondary": "#1C2A38",
+    "color_bg_card": "#253240",
+    "color_accent": "#FF4655",
+    "color_accent_hover": "#BD3944",
+    "color_accent_teal": "#00FFC2",
+    "color_text_primary": "#ECE8E1",
+    "color_text_secondary": "#8B978F",
+    "color_border": "#2A3A48",
+    "type_base_size": 16,
+    "logo_text": "VALORANT MERCH",
+    "logo_width": 140,
+    "cart_type": "drawer",
+    "age_verify_enabled": true,
+    "age_verify_minimum": 18,
+    "footer_description": "<p>Premium Valorant-inspired merchandise. Physical replicas of your favorite in-game skins, crafted for real-world carry.</p>",
+    "footer_disclaimer": "Not affiliated with or endorsed by Riot Games or VALORANT™. All product designs are fan-made merchandise."
+  },
+  "presets": {}
+}
