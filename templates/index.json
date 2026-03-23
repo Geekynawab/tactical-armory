@@ -17,38 +17,18 @@
       "blocks": {
         "cat-1": {
           "type": "category",
-          "settings": { "icon": "⚔️", "label": "Knives", "link": "/collections/knives" }
+          "settings": { "icon": "🗝️", "label": "Keychains", "link": "/collections/keychains" }
         },
         "cat-2": {
           "type": "category",
-          "settings": { "icon": "🔫", "label": "Gun Models", "link": "/collections/gun-models" }
+          "settings": { "icon": "🧸", "label": "Toys", "link": "/collections/toys" }
         },
         "cat-3": {
           "type": "category",
-          "settings": { "icon": "🗝️", "label": "Keychains", "link": "/collections/keychains" }
-        },
-        "cat-4": {
-          "type": "category",
-          "settings": { "icon": "👕", "label": "Apparel", "link": "/collections/apparel" }
-        },
-        "cat-5": {
-          "type": "category",
           "settings": { "icon": "🖱️", "label": "Mousepads", "link": "/collections/mousepads" }
-        },
-        "cat-6": {
-          "type": "category",
-          "settings": { "icon": "🏆", "label": "Collectibles", "link": "/collections/collectibles" }
-        },
-        "cat-7": {
-          "type": "category",
-          "settings": { "icon": "🎁", "label": "Bundles", "link": "/collections/bundles" }
-        },
-        "cat-8": {
-          "type": "category",
-          "settings": { "icon": "🏷️", "label": "Sale", "link": "/collections/sale" }
         }
       },
-      "block_order": ["cat-1","cat-2","cat-3","cat-4","cat-5","cat-6","cat-7","cat-8"]
+      "block_order": ["cat-1","cat-2","cat-3"]
     },
     "featured-collection": {
       "type": "featured-collection",
