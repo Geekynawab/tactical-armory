@@ -1,17 +1,19 @@
 <section class="hero-banner" id="hero-banner-{{ section.id }}">
-  <!-- Product mosaic background -->
-  <div class="hero-banner__mosaic" aria-hidden="true">
+  <!-- Slideshow background -->
+  <div class="hero-banner__slideshow" aria-hidden="true">
     {%- assign all_products = collections.all.products -%}
-    {%- for product in all_products limit: 24 -%}
+    {%- assign slide_index = 0 -%}
+    {%- for product in all_products limit: 12 -%}
       {%- if product.featured_image != blank -%}
-        <div class="hero-banner__mosaic-item">
+        <div class="hero-banner__slide{% if slide_index == 0 %} active{% endif %}">
           <img
-            src="{{ product.featured_image | image_url: width: 400 }}"
+            src="{{ product.featured_image | image_url: width: 1600 }}"
             alt=""
-            loading="{%- if forloop.index <= 6 -%}eager{%- else -%}lazy{%- endif -%}"
-            width="400"
-            height="400">
+            loading="{%- if slide_index == 0 -%}eager{%- else -%}lazy{%- endif -%}"
+            width="1600"
+            height="900">
         </div>
+        {%- assign slide_index = slide_index | plus: 1 -%}
       {%- endif -%}
     {%- endfor -%}
   </div>

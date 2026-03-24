@@ -463,7 +463,28 @@
   }
 
   /* --------------------------------------------------------------------------
-     11. Collections Menu Dropdown
+     11. Hero Slideshow
+     -------------------------------------------------------------------------- */
+  var HeroSlideshow = {
+    slides: [],
+    current: 0,
+    interval: null,
+
+    init: function () {
+      this.slides = $$('.hero-banner__slide');
+      if (this.slides.length < 2) return;
+      this.interval = setInterval(function () { HeroSlideshow.next(); }, 4000);
+    },
+
+    next: function () {
+      this.slides[this.current].classList.remove('active');
+      this.current = (this.current + 1) % this.slides.length;
+      this.slides[this.current].classList.add('active');
+    }
+  };
+
+  /* --------------------------------------------------------------------------
+     12. Collections Menu Dropdown
      -------------------------------------------------------------------------- */
   var CollectionsMenu = {
     btn: null,
@@ -515,6 +536,7 @@
     AddToCart.init();
     MobileNav.init();
     CollectionsMenu.init();
+    HeroSlideshow.init();
     VariantSelector.init();
     ProductGallery.init();
     AnnouncementBar.init();
