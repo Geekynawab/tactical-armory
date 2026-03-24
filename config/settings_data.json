@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "sections": {
@@ -25,7 +34,17 @@
     "age_verify_enabled": true,
     "age_verify_minimum": 18,
     "footer_description": "<p>Premium Valorant-inspired merchandise. Physical replicas of your favorite in-game skins, crafted for real-world carry.</p>",
-    "footer_disclaimer": "Not affiliated with or endorsed by Riot Games or VALORANT™. All product designs are fan-made merchandise."
+    "footer_disclaimer": "Not affiliated with or endorsed by Riot Games or VALORANT™. All product designs are fan-made merchandise.",
+    "blocks": {
+      "7870687481494312845": {
+        "type": "shopify://apps/wishlist-hero/blocks/app-embed/a9a5079b-59e8-47cb-b659-ecf1c60b9b72",
+        "disabled": false,
+        "settings": {
+          "additionalWLButtonCssClasses": "",
+          "additionalWLCartBubbleCssClasses": ""
+        }
+      }
+    }
   },
   "presets": {}
 }
