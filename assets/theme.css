@@ -2399,6 +2399,23 @@ h4 { font-size: 1.125rem; }
 }
 
 /* ============================================================
+   THIRD-PARTY CHAT WIDGET — pin to very bottom
+   ============================================================ */
+/* Shopify Inbox */
+#shopify-chat { bottom: 0 !important; }
+/* Common chat widget iframes/containers */
+iframe[id*="chat"],
+iframe[title*="chat" i],
+iframe[title*="Chat" i],
+div[id*="chat-widget"],
+div[class*="chat-bubble"],
+div[id*="tidio"],
+div[id*="gorgias"] {
+  bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* ============================================================
    FEATURES PAGE
    ============================================================ */
 .features-page {
