@@ -1953,9 +1953,12 @@ h4 { font-size: 1.125rem; }
   overflow: hidden;
 }
 .product-slideshow__slide img {
-  width: 100%;
-  height: auto;
+  width: auto;
+  height: 400px;
+  max-width: 100%;
   display: block;
+  margin: 0 auto;
+  object-fit: contain;
   display: block;
 }
 .product-slideshow__btn {
