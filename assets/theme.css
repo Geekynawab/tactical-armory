@@ -865,8 +865,8 @@ h4 { font-size: 1.125rem; }
   color: var(--color-text-primary);
 }
 .product-card__price .sale { color: var(--color-accent); }
-.product-card__price .compare-at {
-  font-size: 0.8rem;
+.compare-at {
+  font-size: 0.8em;
   color: var(--color-text-muted);
   text-decoration: line-through;
   margin-left: 0.4rem;
