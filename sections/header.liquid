@@ -53,6 +53,9 @@
     </div>
   </div>
 
+  <!-- Nav overlay (closes drawer on outside click) -->
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay" aria-hidden="true"></div>
+
   <!-- Nav drawer (hamburger opens this) -->
   <nav class="mobile-nav" id="mobile-nav" aria-label="Site navigation">
 
@@ -62,23 +65,25 @@
 
     <div class="mobile-nav__item">
       <button class="mobile-nav__link mobile-nav__toggle" data-mobile-toggle="mobile-sub-types">
-        Browse by Type <span class="toggle-icon">+</span>
+        Browse by Type
+        <span class="toggle-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
       </button>
       <div class="mobile-nav__sub" id="mobile-sub-types">
-        <a href="/collections/all/keychains" class="mobile-nav__sub-link">🗝️ Keychains</a>
-        <a href="/collections/all/toys" class="mobile-nav__sub-link">🧸 Toys</a>
-        <a href="/collections/all/mousepads" class="mobile-nav__sub-link">🖱️ Mousepads</a>
+        <a href="/collections/all/keychains">🗝️ Keychains</a>
+        <a href="/collections/all/toys">🧸 Toys</a>
+        <a href="/collections/all/mousepads">🖱️ Mousepads</a>
       </div>
     </div>
 
     <div class="mobile-nav__item">
       <button class="mobile-nav__link mobile-nav__toggle" data-mobile-toggle="mobile-sub-collections">
-        Skin Collections <span class="toggle-icon">+</span>
+        Skins
+        <span class="toggle-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
       </button>
       <div class="mobile-nav__sub" id="mobile-sub-collections">
-        <a href="/collections/prime" class="mobile-nav__sub-link">⚡ Prime</a>
-        <a href="/collections/reaver" class="mobile-nav__sub-link">💀 Reaver</a>
-        <a href="/collections/ion" class="mobile-nav__sub-link">🔵 Ion</a>
+        <a href="/collections/prime">⚡ Prime</a>
+        <a href="/collections/reaver">💀 Reaver</a>
+        <a href="/collections/ion">🔵 Ion</a>
       </div>
     </div>
 

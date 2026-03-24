@@ -247,29 +247,41 @@
   var MobileNav = {
     hamburger: null,
     nav:       null,
+    overlay:   null,
 
     init: function () {
       this.hamburger = $('#hamburger-btn');
       this.nav       = $('#mobile-nav');
+      this.overlay   = $('#mobile-nav-overlay');
       if (!this.hamburger) return;
 
       on(this.hamburger, 'click', function () { MobileNav.toggle(); });
+      if (this.overlay) on(this.overlay, 'click', function () { MobileNav.close(); });
 
       // Accordion sub-menus
       on(this.nav, 'click', function (e) {
         var toggle = e.target.closest('[data-mobile-toggle]');
         if (!toggle) return;
         var sub = $('#' + toggle.dataset.mobileToggle);
-        if (sub) sub.classList.toggle('open');
-        toggle.querySelector('.toggle-icon').textContent =
-          sub && sub.classList.contains('open') ? '−' : '+';
+        if (!sub) return;
+        var opening = !sub.classList.contains('open');
+        sub.classList.toggle('open', opening);
+        toggle.classList.toggle('open', opening);
       });
     },
 
     toggle: function () {
       var isOpen = this.hamburger.classList.toggle('open');
       this.nav.classList.toggle('open', isOpen);
+      if (this.overlay) this.overlay.classList.toggle('open', isOpen);
       document.body.style.overflow = isOpen ? 'hidden' : '';
+    },
+
+    close: function () {
+      this.hamburger.classList.remove('open');
+      this.nav.classList.remove('open');
+      if (this.overlay) this.overlay.classList.remove('open');
+      document.body.style.overflow = '';
     }
   };
 
