@@ -618,24 +618,23 @@
      -------------------------------------------------------------------------- */
   var ProductSlideshow = {
     track: null,
-    slides: [],
+    total: 0,
     current: 0,
     interval: null,
-
-    perView: function () {
-      return window.innerWidth <= 1024 ? 1 : 3;
-    },
+    animating: false,
 
     init: function () {
-      this.track  = $('#product-slideshow-track');
+      this.track = $('#product-slideshow-track');
       if (!this.track) return;
-      this.slides = $$('.product-slideshow__slide', this.track.parentElement);
-      if (this.slides.length < 2) return;
+      this.total = this.track.children.length;
+      if (this.total < 2) return;
+
+      // Clone first slide for seamless loop
+      this.track.appendChild(this.track.children[0].cloneNode(true));
 
       var self = this;
       on($('#slideshow-prev'), 'click', function () { self.move(-1); });
       on($('#slideshow-next'), 'click', function () { self.move(1); });
-
       on(this.track.parentElement, 'mouseenter', function () { self.stop(); });
       on(this.track.parentElement, 'mouseleave', function () { self.start(); });
 
@@ -643,18 +642,38 @@
     },
 
     move: function (dir) {
-      var spv = this.perView();
-      var maxIndex = this.slides.length - spv;
-      this.current = this.current + dir;
-      if (this.current > maxIndex) this.current = 0;
-      if (this.current < 0) this.current = maxIndex;
-      var offset = -(this.current * (100 / spv));
-      this.track.style.transform = 'translateX(' + offset + '%)';
+      if (this.animating) return;
+      var self = this;
+      self.animating = true;
+      self.current += dir;
+
+      // Clamp for prev button
+      if (self.current < 0) {
+        self.track.style.transition = 'none';
+        self.current = self.total;
+        self.track.style.transform = 'translateX(-' + (self.current * 100) + '%)';
+        // Force reflow then animate back
+        self.track.getBoundingClientRect();
+        self.current = self.total - 1;
+      }
+
+      self.track.style.transition = 'transform 1s ease';
+      self.track.style.transform = 'translateX(-' + (self.current * 100) + '%)';
+
+      setTimeout(function () {
+        // Seamless wrap-around at clone
+        if (self.current === self.total) {
+          self.track.style.transition = 'none';
+          self.current = 0;
+          self.track.style.transform = 'translateX(0%)';
+        }
+        self.animating = false;
+      }, 1020);
     },
 
     start: function () {
       var self = this;
-      this.interval = setInterval(function () { self.move(1); }, 800);
+      this.interval = setInterval(function () { self.move(1); }, 2000);
     },
 
     stop: function () {
@@ -712,6 +731,27 @@
   };
 
   /* --------------------------------------------------------------------------
+     Hero Slideshow (crossfade)
+     -------------------------------------------------------------------------- */
+  var HeroSlideshow = {
+    slides: [],
+    current: 0,
+
+    init: function () {
+      this.slides = $$('.hero-banner__slide');
+      if (this.slides.length < 2) return;
+      var self = this;
+      setInterval(function () { self.next(); }, 4000);
+    },
+
+    next: function () {
+      this.slides[this.current].classList.remove('active');
+      this.current = (this.current + 1) % this.slides.length;
+      this.slides[this.current].classList.add('active');
+    }
+  };
+
+  /* --------------------------------------------------------------------------
      Boot
      -------------------------------------------------------------------------- */
   document.addEventListener('DOMContentLoaded', function () {
@@ -719,6 +759,7 @@
     AddToCart.init();
     MobileNav.init();
     CollectionsMenu.init();
+    HeroSlideshow.init();
     SearchOverlay.init();
     Wishlist.init();
     ProductSlideshow.init();

@@ -709,6 +709,25 @@ h4 { font-size: 1.125rem; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.hero-banner__slideshow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-banner__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.hero-banner__slide.active {
+  opacity: 1;
+}
+.hero-banner__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   object-position: center;
   filter: brightness(0.55) saturate(0.8);
 }
@@ -1927,7 +1946,7 @@ h4 { font-size: 1.125rem; }
 }
 .product-slideshow__track {
   display: flex;
-  transition: transform 0.5s ease;
+  will-change: transform;
 }
 .product-slideshow__slide {
   flex: 0 0 33.333%;
