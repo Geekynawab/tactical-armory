@@ -1954,8 +1954,8 @@ h4 { font-size: 1.125rem; }
 }
 .product-slideshow__slide img {
   width: 100%;
-  height: 480px;
-  object-fit: cover;
+  height: auto;
+  display: block;
   display: block;
 }
 .product-slideshow__btn {
@@ -2229,7 +2229,6 @@ h4 { font-size: 1.125rem; }
   .product-layout__gallery { position: static; }
   .product-gallery { position: static; }
   .product-slideshow__slide { flex: 0 0 100%; }
-  .product-slideshow__slide img { height: 320px; }
   .nav-primary, .search-form { display: none; }
   .hamburger { display: flex; }
 }
@@ -2260,9 +2259,6 @@ h4 { font-size: 1.125rem; }
   .product-info__add-to-cart { flex-wrap: wrap; }
   .product-info__add-to-cart .btn { width: 100%; }
   .product-info__qty { width: 100%; justify-content: center; }
-
-  /* Slideshow mobile */
-  .product-slideshow__slide img { height: 260px; }
 
   /* Breadcrumb */
   .breadcrumb { font-size: 0.7rem; flex-wrap: wrap; }
