@@ -676,12 +676,24 @@
       if (!this.track) return;
       this.total = this.track.children.length;
       if (this.total < 2) return;
+      // Clone first slide to end so wrap-around looks seamless
+      this.track.appendChild(this.track.children[0].cloneNode(true));
       this.interval = setInterval(function () { HeroSlideshow.next(); }, 1400);
     },
 
     next: function () {
-      this.current = (this.current + 1) % this.total;
-      this.track.style.transform = 'translateX(-' + (this.current * 100) + '%)';
+      var self = this;
+      self.current++;
+      self.track.style.transition = 'transform 0.7s ease';
+      self.track.style.transform = 'translateX(-' + (self.current * 100) + '%)';
+      // After showing the cloned first slide, silently snap back to real first
+      if (self.current === self.total) {
+        setTimeout(function () {
+          self.track.style.transition = 'none';
+          self.current = 0;
+          self.track.style.transform = 'translateX(0%)';
+        }, 720);
+      }
     }
   };
 
