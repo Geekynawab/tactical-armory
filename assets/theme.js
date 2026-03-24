@@ -835,12 +835,62 @@
   };
 
   /* --------------------------------------------------------------------------
+     Mega Menu (desktop)
+     -------------------------------------------------------------------------- */
+  var MegaMenu = {
+    btn:   null,
+    item:  null,
+    menu:  null,
+    timer: null,
+
+    init: function () {
+      this.item = $('#categories-nav-item');
+      this.menu = $('#mega-menu');
+      if (!this.item || !this.menu) return;
+      this.btn = this.item.querySelector('.desktop-nav__btn');
+      var self = this;
+
+      on(this.item, 'mouseenter', function () {
+        clearTimeout(self.timer);
+        self.open();
+      });
+      on(this.item, 'mouseleave', function () {
+        self.timer = setTimeout(function () { self.close(); }, 160);
+      });
+      on(this.menu, 'mouseenter', function () {
+        clearTimeout(self.timer);
+      });
+      on(this.menu, 'mouseleave', function () {
+        self.timer = setTimeout(function () { self.close(); }, 160);
+      });
+      on(document, 'click', function (e) {
+        if (!self.item.contains(e.target) && !self.menu.contains(e.target)) {
+          self.close();
+        }
+      });
+    },
+
+    open: function () {
+      this.menu.classList.add('open');
+      this.menu.setAttribute('aria-hidden', 'false');
+      if (this.btn) this.btn.classList.add('active');
+    },
+
+    close: function () {
+      this.menu.classList.remove('open');
+      this.menu.setAttribute('aria-hidden', 'true');
+      if (this.btn) this.btn.classList.remove('active');
+    }
+  };
+
+  /* --------------------------------------------------------------------------
      Boot
      -------------------------------------------------------------------------- */
   document.addEventListener('DOMContentLoaded', function () {
     CartDrawer.init();
     AddToCart.init();
     MobileNav.init();
+    MegaMenu.init();
     CollectionsMenu.init();
     HeroSlideshow.init();
     SearchOverlay.init();

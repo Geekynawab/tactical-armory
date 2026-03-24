@@ -1,10 +1,9 @@
 <header class="site-header" role="banner">
 
-  <!-- Main header -->
   <div class="container">
     <div class="header-inner">
 
-      <!-- Left: Hamburger + MENU label -->
+      <!-- Mobile only: Hamburger + MENU label -->
       <div class="header-left">
         <button class="hamburger" id="hamburger-btn" aria-label="{{ 'accessibility.open_navigation' | t }}" aria-controls="mobile-nav" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -12,7 +11,7 @@
         <span class="header-menu-label">MENU</span>
       </div>
 
-      <!-- Center: Logo -->
+      <!-- Logo -->
       <a href="/" class="site-logo" aria-label="{{ shop.name }} — Home">
         {%- if settings.logo != blank -%}
           <img
@@ -24,6 +23,20 @@
           <span class="site-logo__text">{{ settings.logo_text | default: 'KNIVES FACTORY' }}</span>
         {%- endif -%}
       </a>
+
+      <!-- Desktop only: Nav -->
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="/collections/all" class="desktop-nav__link">Shop All</a>
+
+        <div class="desktop-nav__item" id="categories-nav-item">
+          <button class="desktop-nav__link desktop-nav__btn" aria-expanded="false" aria-controls="mega-menu">
+            Categories
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
+
+        <a href="/pages/contact" class="desktop-nav__link">Contact</a>
+      </nav>
 
       <!-- Right: Action icons -->
       <div class="header-actions">
@@ -53,10 +66,35 @@
     </div>
   </div>
 
-  <!-- Nav overlay (closes drawer on outside click) -->
+  <!-- Mega menu (desktop only) -->
+  <div class="mega-menu" id="mega-menu" aria-hidden="true">
+    <div class="container">
+      <div class="mega-menu__grid">
+
+        <div class="mega-menu__col">
+          <p class="mega-menu__heading">Skins</p>
+          <a href="/collections/prime-1" class="mega-menu__link">Prime</a>
+          <a href="/collections/reaver-1" class="mega-menu__link">Reaver</a>
+          <a href="/collections/ion" class="mega-menu__link">Ion</a>
+          <a href="/collections/all" class="mega-menu__link mega-menu__link--all">Shop All Skins →</a>
+        </div>
+
+        <div class="mega-menu__col">
+          <p class="mega-menu__heading">Accessories</p>
+          <a href="/collections/keychains-1" class="mega-menu__link">Keychains</a>
+          <a href="/collections/toys-1" class="mega-menu__link">Toys</a>
+          <a href="/collections/mousepads-1" class="mega-menu__link">Mousepads</a>
+          <a href="/collections/all" class="mega-menu__link mega-menu__link--all">Shop All →</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Nav overlay (closes mobile drawer on outside click) -->
   <div class="mobile-nav-overlay" id="mobile-nav-overlay" aria-hidden="true"></div>
 
-  <!-- Nav drawer (hamburger opens this) -->
+  <!-- Mobile nav drawer -->
   <nav class="mobile-nav" id="mobile-nav" aria-label="Site navigation">
 
     <div class="mobile-nav__item">
