@@ -846,6 +846,14 @@
     initCollectionSort();
     lazyImages();
 
+    // "In X carts" FOMO counter
+    (function () {
+      var el = document.getElementById('in-carts-count');
+      if (!el) return;
+      var count = Math.floor(Math.random() * 10) + 3; // 3–12
+      el.textContent = count;
+    }());
+
     // Hide floating chat btn until user scrolls near the bottom
     (function () {
       var chatBtn = document.querySelector('.floating-help__btn');
