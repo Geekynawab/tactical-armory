@@ -48,12 +48,9 @@
 
         <div class="product-info__price" id="product-price">
           {%- assign current_variant = product.selected_or_first_available_variant -%}
-          {%- if current_variant.compare_at_price > current_variant.price -%}
-            <span class="sale">{{ current_variant.price | money }}</span>
-            <span class="compare-at">{{ current_variant.compare_at_price | money }}</span>
-          {%- else -%}
-            <span>{{ current_variant.price | money }}</span>
-          {%- endif -%}
+          {%- assign inflated = current_variant.price | times: 1.3 | ceil -%}
+          <span class="sale">{{ current_variant.price | money }}</span>
+          <span class="compare-at">{{ inflated | money }}</span>
         </div>
 
         <hr class="product-info__divider">

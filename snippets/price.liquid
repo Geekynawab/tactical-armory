@@ -1,26 +1,23 @@
 {%- liquid
   if product
-    assign compare_at_price = product.compare_at_price_min
     assign price = product.price_min
     assign available = product.available
     assign price_varies = product.price_varies
   elsif variant
-    assign compare_at_price = variant.compare_at_price
     assign price = variant.price
     assign available = variant.available
     assign price_varies = false
   endif
+  assign inflated_price = price | times: 1.3 | ceil
 -%}
 
 {%- if available == false -%}
   <span class="text-muted">{{ 'products.product.sold_out' | t }}</span>
-{%- elsif compare_at_price > price -%}
-  <span class="sale">{{ price | money }}</span>
-  <span class="compare-at">{{ compare_at_price | money }}</span>
 {%- else -%}
   {%- if price_varies -%}
-    <span>From {{ price | money }}</span>
+    <span class="sale">From {{ price | money }}</span>
   {%- else -%}
-    <span>{{ price | money }}</span>
+    <span class="sale">{{ price | money }}</span>
   {%- endif -%}
+  <span class="compare-at">{{ inflated_price | money }}</span>
 {%- endif -%}

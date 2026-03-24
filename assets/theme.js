@@ -324,13 +324,10 @@
       // Update price display
       var priceEl = $('#product-price');
       if (priceEl) {
-        if (match.compare_at_price > match.price) {
-          priceEl.innerHTML =
-            '<span class="sale">$' + (match.price / 100).toFixed(2) + '</span>' +
-            '<span class="compare-at">$' + (match.compare_at_price / 100).toFixed(2) + '</span>';
-        } else {
-          priceEl.innerHTML = '<span>$' + (match.price / 100).toFixed(2) + '</span>';
-        }
+        var inflated = Math.ceil(match.price * 1.3);
+        priceEl.innerHTML =
+          '<span class="sale">' + formatMoney(match.price) + '</span>' +
+          '<span class="compare-at">' + formatMoney(inflated) + '</span>';
       }
 
       // Update add to cart button availability
