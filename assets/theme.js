@@ -537,38 +537,33 @@
   }
 
   /* --------------------------------------------------------------------------
-     11. Search Overlay
+     11. Search (inline header)
      -------------------------------------------------------------------------- */
   var SearchOverlay = {
-    overlay: null,
+    bar:   null,
     input: null,
 
     init: function () {
-      this.overlay = $('#search-overlay');
-      this.input   = $('#search-overlay-input');
-      if (!this.overlay) return;
+      this.bar   = $('#header-search');
+      this.input = $('#header-search-input');
+      if (!this.bar) return;
 
-      on($('#search-toggle'), 'click', function () { SearchOverlay.open(); });
-      on($('#search-close'),  'click', function () { SearchOverlay.close(); });
-      on(this.overlay, 'click', function (e) {
-        if (e.target === SearchOverlay.overlay) SearchOverlay.close();
-      });
+      on($('#search-toggle'),      'click', function () { SearchOverlay.open(); });
+      on($('#header-search-close'),'click', function () { SearchOverlay.close(); });
       on(document, 'keydown', function (e) {
         if (e.key === 'Escape') SearchOverlay.close();
       });
     },
 
     open: function () {
-      this.overlay.classList.add('open');
-      this.overlay.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      if (this.input) setTimeout(function () { SearchOverlay.input.focus(); }, 50);
+      this.bar.classList.add('open');
+      this.bar.setAttribute('aria-hidden', 'false');
+      if (this.input) setTimeout(function () { SearchOverlay.input.focus(); }, 60);
     },
 
     close: function () {
-      this.overlay.classList.remove('open');
-      this.overlay.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
+      this.bar.classList.remove('open');
+      this.bar.setAttribute('aria-hidden', 'true');
     }
   };
 
@@ -576,31 +571,36 @@
      12. Wishlist
      -------------------------------------------------------------------------- */
   var Wishlist = {
-    key: 'valo-wishlist',
+    key: 'valo-wishlist-v2',
 
-    get: function () {
-      try { return JSON.parse(localStorage.getItem(this.key)) || []; } catch (e) { return []; }
+    getAll: function () {
+      try { return JSON.parse(localStorage.getItem(this.key)) || {}; } catch (e) { return {}; }
     },
 
-    save: function (ids) {
-      localStorage.setItem(this.key, JSON.stringify(ids));
+    saveAll: function (data) {
+      localStorage.setItem(this.key, JSON.stringify(data));
     },
 
-    toggle: function (id) {
-      var ids = this.get();
-      var idx = ids.indexOf(id);
-      if (idx === -1) { ids.push(id); } else { ids.splice(idx, 1); }
-      this.save(ids);
+    toggle: function (id, productData) {
+      var items = this.getAll();
+      var added = !items[id];
+      if (added) {
+        items[id] = productData || { id: id };
+      } else {
+        delete items[id];
+      }
+      this.saveAll(items);
       this.updateUI();
-      return idx === -1;
+      return added;
     },
 
     has: function (id) {
-      return this.get().indexOf(id) !== -1;
+      return !!this.getAll()[id];
     },
 
     updateUI: function () {
-      var ids   = this.get();
+      var items = this.getAll();
+      var ids   = Object.keys(items).map(Number);
       var badge = $('#wishlist-count');
       if (badge) badge.textContent = ids.length > 0 ? ids.length : '';
 
@@ -610,20 +610,84 @@
       });
     },
 
+    renderPanel: function () {
+      var inner = $('#wishlist-panel-inner');
+      if (!inner) return;
+      var items = this.getAll();
+      var ids   = Object.keys(items);
+      if (ids.length === 0) {
+        inner.innerHTML = '<p class="wishlist-panel__empty">No saved items yet.</p>';
+        return;
+      }
+      inner.innerHTML = ids.map(function (id) {
+        var p = items[id];
+        var price = p.price ? (p.price / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) : '';
+        return '<a href="' + (p.url || '#') + '" class="wishlist-panel__item">' +
+          (p.image ? '<img src="' + p.image + '" class="wishlist-panel__img" alt="" loading="lazy">' : '') +
+          '<div class="wishlist-panel__info">' +
+            '<div class="wishlist-panel__title">' + (p.title || 'Product') + '</div>' +
+            (price ? '<div class="wishlist-panel__price">' + price + '</div>' : '') +
+          '</div>' +
+          '<button class="wishlist-panel__remove" data-wishlist-remove="' + id + '" aria-label="Remove">' +
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
+          '</button>' +
+        '</a>';
+      }).join('');
+    },
+
     init: function () {
       this.updateUI();
+      var panel     = $('#wishlist-panel');
+      var panelOpen = false;
 
       on(document, 'click', function (e) {
+        // Toggle product wishlist button
         var btn = e.target.closest('[data-wishlist]');
-        if (!btn) return;
-        e.preventDefault();
-        var id = parseInt(btn.dataset.wishlist, 10);
-        Wishlist.toggle(id);
-      });
+        if (btn && !btn.closest('#wishlist-panel') && !e.target.closest('[data-wishlist-remove]')) {
+          e.preventDefault();
+          var id   = parseInt(btn.dataset.wishlist, 10);
+          var data = btn.dataset.wishlistTitle ? {
+            id:    id,
+            title: btn.dataset.wishlistTitle,
+            url:   btn.dataset.wishlistUrl,
+            price: parseInt(btn.dataset.wishlistPrice, 10),
+            image: btn.dataset.wishlistImage
+          } : null;
+          Wishlist.toggle(id, data);
+          return;
+        }
 
-      on($('#wishlist-icon'), 'click', function (e) {
-        if (e.target.closest('[data-wishlist]')) return;
-        window.location.href = '/wishlist';
+        // Remove from panel
+        var removeBtn = e.target.closest('[data-wishlist-remove]');
+        if (removeBtn) {
+          e.preventDefault();
+          var removeId = parseInt(removeBtn.dataset.wishlistRemove, 10);
+          Wishlist.toggle(removeId);
+          Wishlist.renderPanel();
+          return;
+        }
+
+        // Toggle panel via header icon
+        var icon = e.target.closest('#wishlist-icon');
+        if (icon && panel) {
+          panelOpen = !panelOpen;
+          if (panelOpen) {
+            Wishlist.renderPanel();
+            panel.classList.add('open');
+            panel.setAttribute('aria-hidden', 'false');
+          } else {
+            panel.classList.remove('open');
+            panel.setAttribute('aria-hidden', 'true');
+          }
+          return;
+        }
+
+        // Click outside closes panel
+        if (panel && panelOpen && !panel.contains(e.target)) {
+          panelOpen = false;
+          panel.classList.remove('open');
+          panel.setAttribute('aria-hidden', 'true');
+        }
       });
     }
   };
