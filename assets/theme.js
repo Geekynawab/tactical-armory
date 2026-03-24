@@ -363,7 +363,72 @@
   };
 
   /* --------------------------------------------------------------------------
-     6. Announcement Bar dismiss
+     6. Gallery Zoom + Lightbox
+     -------------------------------------------------------------------------- */
+  var GalleryZoom = {
+    lb: null,
+
+    init: function () {
+      var mainWrap = document.querySelector('.product-gallery__main');
+      if (!mainWrap) return;
+
+      // Build lightbox
+      var lb = document.createElement('div');
+      lb.className = 'gallery-lightbox';
+      lb.innerHTML =
+        '<button class="gallery-lightbox__close" aria-label="Close">' +
+        '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
+        '</button><img class="gallery-lightbox__img" src="" alt="">';
+      document.body.appendChild(lb);
+      this.lb = lb;
+
+      var self = this;
+
+      // Hover zoom — desktop only
+      on(mainWrap, 'mousemove', function (e) {
+        var img = mainWrap.querySelector('img');
+        if (!img) return;
+        var rect = mainWrap.getBoundingClientRect();
+        var x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+        var y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
+        img.style.transition = 'none';
+        img.style.transformOrigin = x + '% ' + y + '%';
+        img.style.transform = 'scale(2.2)';
+      });
+
+      on(mainWrap, 'mouseleave', function () {
+        var img = mainWrap.querySelector('img');
+        if (!img) return;
+        img.style.transition = 'transform 0.3s ease';
+        img.style.transform = '';
+        img.style.transformOrigin = 'center center';
+      });
+
+      // Click → lightbox (works on touch too)
+      on(mainWrap, 'click', function () {
+        var img = mainWrap.querySelector('img');
+        if (!img) return;
+        var hiResSrc = img.src.replace(/width=\d+/, 'width=2000');
+        lb.querySelector('.gallery-lightbox__img').src = hiResSrc;
+        lb.querySelector('.gallery-lightbox__img').alt = img.alt;
+        lb.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+
+      // Close lightbox
+      on(lb.querySelector('.gallery-lightbox__close'), 'click', function () { self.close(); });
+      on(lb, 'click', function (e) { if (e.target === lb) self.close(); });
+      on(document, 'keydown', function (e) { if (e.key === 'Escape') self.close(); });
+    },
+
+    close: function () {
+      if (this.lb) this.lb.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  };
+
+  /* --------------------------------------------------------------------------
+     7. Announcement Bar dismiss
      -------------------------------------------------------------------------- */
   var AnnouncementBar = {
     init: function () {
@@ -773,6 +838,7 @@
     StickyATC.init();
     VariantSelector.init();
     ProductGallery.init();
+    GalleryZoom.init();
     AnnouncementBar.init();
     AgeVerify.init();
     CookieBanner.init();
