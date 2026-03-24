@@ -629,7 +629,7 @@
       this.total = this.track.children.length;
       if (this.total < 2) return;
 
-      // Clone first slide for seamless loop
+      // Clone first slide at end for seamless loop
       this.track.appendChild(this.track.children[0].cloneNode(true));
 
       var self = this;
@@ -647,33 +647,29 @@
       self.animating = true;
       self.current += dir;
 
-      // Clamp for prev button
-      if (self.current < 0) {
-        self.track.style.transition = 'none';
-        self.current = self.total;
-        self.track.style.transform = 'translateX(-' + (self.current * 100) + '%)';
-        // Force reflow then animate back
-        self.track.getBoundingClientRect();
-        self.current = self.total - 1;
-      }
-
       self.track.style.transition = 'transform 1s ease';
       self.track.style.transform = 'translateX(-' + (self.current * 100) + '%)';
 
       setTimeout(function () {
-        // Seamless wrap-around at clone
+        // After sliding to clone of first, snap back to real first silently
         if (self.current === self.total) {
           self.track.style.transition = 'none';
           self.current = 0;
           self.track.style.transform = 'translateX(0%)';
         }
+        // After sliding before first, snap to last
+        if (self.current < 0) {
+          self.track.style.transition = 'none';
+          self.current = self.total - 1;
+          self.track.style.transform = 'translateX(-' + (self.current * 100) + '%)';
+        }
         self.animating = false;
-      }, 1020);
+      }, 1050);
     },
 
     start: function () {
       var self = this;
-      this.interval = setInterval(function () { self.move(1); }, 2000);
+      this.interval = setInterval(function () { self.move(1); }, 4000);
     },
 
     stop: function () {

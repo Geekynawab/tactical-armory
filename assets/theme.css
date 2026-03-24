@@ -1949,7 +1949,7 @@ h4 { font-size: 1.125rem; }
   will-change: transform;
 }
 .product-slideshow__slide {
-  flex: 0 0 33.333%;
+  flex: 0 0 100%;
   overflow: hidden;
 }
 .product-slideshow__slide img {
