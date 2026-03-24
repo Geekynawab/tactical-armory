@@ -8,10 +8,7 @@
       </div>
     {%- endif -%}
     <h1 class="collection-header__title">{{ collection.title }}</h1>
-    <p class="collection-header__count">
-      {{ collection.products_count }}
-      {{ 'collections.general.items_with_count_other' | t: count: collection.products_count }}
-    </p>
+    <p class="collection-header__count">{{ collection.products_count }} products</p>
     {%- if collection.description != blank -%}
       <p style="color:var(--color-text-secondary);font-size:0.88rem;margin-top:0.5rem;max-width:640px">{{ collection.description }}</p>
     {%- endif -%}
