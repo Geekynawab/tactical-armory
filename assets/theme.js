@@ -673,7 +673,7 @@
     init: function () {
       this.slides = $$('.hero-banner__slide');
       if (this.slides.length < 2) return;
-      this.interval = setInterval(function () { HeroSlideshow.next(); }, 4000);
+      this.interval = setInterval(function () { HeroSlideshow.next(); }, 1400);
     },
 
     next: function () {

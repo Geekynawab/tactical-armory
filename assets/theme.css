@@ -709,7 +709,7 @@ h4 { font-size: 1.125rem; }
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 1.2s ease;
+  transition: opacity 0.7s ease;
 }
 .hero-banner__slide.active {
   opacity: 1;
