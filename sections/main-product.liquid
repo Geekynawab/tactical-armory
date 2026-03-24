@@ -73,11 +73,10 @@
       <div class="product-layout__info">
 
         <!-- Category tags -->
-        {%- if collection or product.type != blank or product.vendor != blank -%}
+        {%- if collection or product.type != blank -%}
           <div class="product-info__tags">
             {%- if collection -%}<span>{{ collection.title }}</span>{%- endif -%}
             {%- if product.type != blank -%}<span class="tag-sep">|</span><span>{{ product.type }}</span>{%- endif -%}
-            {%- if product.vendor != blank -%}<span class="tag-sep">|</span><span>{{ product.vendor }}</span>{%- endif -%}
           </div>
         {%- endif -%}
 
