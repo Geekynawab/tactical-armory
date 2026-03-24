@@ -552,7 +552,31 @@
   };
 
   /* --------------------------------------------------------------------------
-     13. Product Page Image Slideshow
+     13. Bulk Savings Tiers
+     -------------------------------------------------------------------------- */
+  var BulkSavings = {
+    init: function () {
+      var container = $('#bulk-savings');
+      if (!container) return;
+
+      on(container, 'click', function (e) {
+        var tier = e.target.closest('.bulk-tier');
+        if (!tier) return;
+
+        // Update active state
+        $$('.bulk-tier', container).forEach(function (t) { t.classList.remove('active'); });
+        tier.classList.add('active');
+
+        // Set quantity input
+        var qty = parseInt(tier.dataset.qty, 10);
+        var qtyInput = $('[name="quantity"]');
+        if (qtyInput) qtyInput.value = qty;
+      });
+    }
+  };
+
+  /* --------------------------------------------------------------------------
+     14. Product Page Image Slideshow
      -------------------------------------------------------------------------- */
   var ProductSlideshow = {
     track: null,
@@ -678,6 +702,7 @@
     SearchOverlay.init();
     Wishlist.init();
     ProductSlideshow.init();
+    BulkSavings.init();
     VariantSelector.init();
     ProductGallery.init();
     AnnouncementBar.init();

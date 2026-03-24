@@ -72,6 +72,30 @@
           <span class="compare-at">{{ inflated | money }}</span>
         </div>
 
+        <!-- Bulk savings -->
+        {%- assign price_2 = current_variant.price | times: 0.9 | ceil -%}
+        {%- assign price_3 = current_variant.price | times: 0.85 | ceil -%}
+        <div class="bulk-savings" id="bulk-savings"
+          data-price-1="{{ current_variant.price }}"
+          data-price-2="{{ price_2 }}"
+          data-price-3="{{ price_3 }}">
+          <p class="bulk-savings__label">Bulk savings:</p>
+          <div class="bulk-savings__tiers">
+            <button class="bulk-tier active" data-qty="1" type="button">
+              <span class="bulk-tier__qty">Buy 1</span>
+              <span class="bulk-tier__price">{{ current_variant.price | money }}/ea</span>
+            </button>
+            <button class="bulk-tier" data-qty="2" type="button">
+              <span class="bulk-tier__qty">Buy 2</span>
+              <span class="bulk-tier__price">{{ price_2 | money }}/ea <em>–10%</em></span>
+            </button>
+            <button class="bulk-tier" data-qty="3" type="button">
+              <span class="bulk-tier__qty">Buy 3</span>
+              <span class="bulk-tier__price">{{ price_3 | money }}/ea <em>–15%</em></span>
+            </button>
+          </div>
+        </div>
+
         <hr class="product-info__divider">
 
         <!-- Variant JSON for JS -->
