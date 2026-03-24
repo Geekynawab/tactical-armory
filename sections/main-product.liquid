@@ -32,23 +32,11 @@
 
       <!-- LEFT: Sticky gallery -->
       <div class="product-layout__gallery">
-        <div class="product-gallery">
-          <div class="product-gallery__main">
-            {%- if product.featured_image != blank -%}
-              <img
-                id="gallery-main-img"
-                src="{{ product.featured_image | image_url: width: 900 }}"
-                alt="{{ product.featured_image.alt | default: product.title | escape }}"
-                loading="eager"
-                width="900"
-                height="900">
-            {%- else -%}
-              {{ 'product-1' | placeholder_svg_tag: 'product-gallery__placeholder' }}
-            {%- endif -%}
-          </div>
+        <div class="product-gallery{% if product.images.size <= 1 %} product-gallery--single{% endif %}">
+
           {%- if product.images.size > 1 -%}
             <div class="product-gallery__thumbs">
-              {%- for image in product.images limit: 6 -%}
+              {%- for image in product.images limit: 8 -%}
                 <button
                   class="product-gallery__thumb{% if forloop.first %} active{% endif %}"
                   data-src="{{ image | image_url: width: 900 }}"
@@ -63,6 +51,21 @@
               {%- endfor -%}
             </div>
           {%- endif -%}
+
+          <div class="product-gallery__main">
+            {%- if product.featured_image != blank -%}
+              <img
+                id="gallery-main-img"
+                src="{{ product.featured_image | image_url: width: 900 }}"
+                alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                loading="eager"
+                width="900"
+                height="900">
+            {%- else -%}
+              {{ 'product-1' | placeholder_svg_tag: 'product-gallery__placeholder' }}
+            {%- endif -%}
+          </div>
+
         </div>
       </div>
 

@@ -1680,30 +1680,30 @@ h4 { font-size: 1.125rem; }
 }
 
 .product-gallery {
-  /* no longer needs sticky here, parent handles it */
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  gap: 0.75rem;
+  align-items: start;
 }
 
-.product-gallery__main {
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  background: var(--color-bg-card);
-  margin-bottom: 0.75rem;
-  border: 1px solid var(--color-border);
-}
-.product-gallery__main img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.product-gallery--single {
+  grid-template-columns: 1fr;
 }
 
 .product-gallery__thumbs {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 0.5rem;
+  max-height: 560px;
+  overflow-y: auto;
+  scrollbar-width: none;
 }
+.product-gallery__thumbs::-webkit-scrollbar { display: none; }
 
 .product-gallery__thumb {
   aspect-ratio: 1 / 1;
+  width: 100%;
+  flex-shrink: 0;
   overflow: hidden;
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
@@ -1713,6 +1713,18 @@ h4 { font-size: 1.125rem; }
 .product-gallery__thumb:hover,
 .product-gallery__thumb.active { border-color: var(--color-accent); }
 .product-gallery__thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.product-gallery__main {
+  overflow: hidden;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  aspect-ratio: 1 / 1;
+}
+.product-gallery__main img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
 .product-info__collection {
   font-size: 0.75rem;
@@ -2230,7 +2242,7 @@ h4 { font-size: 1.125rem; }
   .product-page__grid { grid-template-columns: 1fr; gap: 2rem; }
   .product-layout { grid-template-columns: 1fr; gap: 2rem; }
   .product-layout__gallery { position: static; }
-  .product-gallery { position: static; }
+  .product-gallery { position: static; grid-template-columns: 64px 1fr; }
   .product-slideshow__slide { flex: 0 0 100%; }
   .nav-primary, .search-form { display: none; }
   .hamburger { display: flex; }
@@ -2257,6 +2269,8 @@ h4 { font-size: 1.125rem; }
   .collections-menu-btn__label { display: none; }
 
   /* Product page mobile */
+  .product-gallery { grid-template-columns: 56px 1fr; }
+  .product-gallery__thumbs { max-height: 320px; }
   .product-info__title { font-size: 1.4rem; }
   .product-info__title-row { flex-wrap: wrap; }
   .product-info__add-to-cart { flex-wrap: wrap; }
