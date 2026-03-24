@@ -1152,6 +1152,29 @@ h4 { font-size: 1.125rem; }
   0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0, 196, 140, 0.5); }
   50% { opacity: 0.6; box-shadow: 0 0 0 5px rgba(0, 196, 140, 0); }
 }
+.low-stock-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-warning);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+}
+.low-stock-badge__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-warning);
+  flex-shrink: 0;
+  animation: pulse-warning 1.4s ease-in-out infinite;
+}
+@keyframes pulse-warning {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255, 184, 0, 0.55); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 5px rgba(255, 184, 0, 0); }
+}
 
 /* --------------------------------------------------------------------------
    Collections Showcase

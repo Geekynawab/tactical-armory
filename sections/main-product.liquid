@@ -164,12 +164,19 @@
           {%- endfor -%}
         {%- endunless -%}
 
-        <!-- In stock indicator -->
+        <!-- In stock / low stock indicator -->
         {%- if current_variant.available -%}
-          <div class="in-stock-badge">
-            <span class="in-stock-badge__dot"></span>
-            In Stock
-          </div>
+          {%- if current_variant.inventory_management != blank and current_variant.inventory_quantity > 0 and current_variant.inventory_quantity <= 10 -%}
+            <div class="low-stock-badge">
+              <span class="low-stock-badge__dot"></span>
+              Only {{ current_variant.inventory_quantity }} left!
+            </div>
+          {%- else -%}
+            <div class="in-stock-badge">
+              <span class="in-stock-badge__dot"></span>
+              In Stock
+            </div>
+          {%- endif -%}
         {%- endif -%}
 
         <!-- Add to cart -->
