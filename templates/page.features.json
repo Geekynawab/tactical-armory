@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "page-features": {
+      "type": "page-features",
+      "settings": {}
+    }
+  },
+  "order": ["page-features"]
+}
