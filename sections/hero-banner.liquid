@@ -1,21 +1,21 @@
 <section class="hero-banner" id="hero-banner-{{ section.id }}">
   <!-- Slideshow background -->
   <div class="hero-banner__slideshow" aria-hidden="true">
-    {%- assign all_products = collections.all.products -%}
-    {%- assign slide_index = 0 -%}
-    {%- for product in all_products limit: 12 -%}
-      {%- if product.featured_image != blank -%}
-        <div class="hero-banner__slide{% if slide_index == 0 %} active{% endif %}">
-          <img
-            src="{{ product.featured_image | image_url: width: 1600 }}"
-            alt=""
-            loading="{%- if slide_index == 0 -%}eager{%- else -%}lazy{%- endif -%}"
-            width="1600"
-            height="900">
-        </div>
-        {%- assign slide_index = slide_index | plus: 1 -%}
-      {%- endif -%}
-    {%- endfor -%}
+    <div class="hero-banner__track" id="hero-track">
+      {%- assign all_products = collections.all.products -%}
+      {%- for product in all_products limit: 12 -%}
+        {%- if product.featured_image != blank -%}
+          <div class="hero-banner__slide">
+            <img
+              src="{{ product.featured_image | image_url: width: 1600 }}"
+              alt=""
+              loading="{%- if forloop.first -%}eager{%- else -%}lazy{%- endif -%}"
+              width="1600"
+              height="900">
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
   </div>
   <!-- Dark overlay -->
   <div class="hero-banner__overlay"></div>

@@ -666,20 +666,22 @@
      14. Hero Slideshow
      -------------------------------------------------------------------------- */
   var HeroSlideshow = {
-    slides: [],
+    track: null,
+    total: 0,
     current: 0,
     interval: null,
 
     init: function () {
-      this.slides = $$('.hero-banner__slide');
-      if (this.slides.length < 2) return;
+      this.track = $('#hero-track');
+      if (!this.track) return;
+      this.total = this.track.children.length;
+      if (this.total < 2) return;
       this.interval = setInterval(function () { HeroSlideshow.next(); }, 1400);
     },
 
     next: function () {
-      this.slides[this.current].classList.remove('active');
-      this.current = (this.current + 1) % this.slides.length;
-      this.slides[this.current].classList.add('active');
+      this.current = (this.current + 1) % this.total;
+      this.track.style.transform = 'translateX(-' + (this.current * 100) + '%)';
     }
   };
 
