@@ -665,37 +665,6 @@
   /* --------------------------------------------------------------------------
      14. Hero Slideshow
      -------------------------------------------------------------------------- */
-  var HeroSlideshow = {
-    track: null,
-    total: 0,
-    current: 0,
-    interval: null,
-
-    init: function () {
-      this.track = $('#hero-track');
-      if (!this.track) return;
-      this.total = this.track.children.length;
-      if (this.total < 2) return;
-      // Clone first slide to end so wrap-around looks seamless
-      this.track.appendChild(this.track.children[0].cloneNode(true));
-      this.interval = setInterval(function () { HeroSlideshow.next(); }, 1400);
-    },
-
-    next: function () {
-      var self = this;
-      self.current++;
-      self.track.style.transition = 'transform 0.7s ease';
-      self.track.style.transform = 'translateX(-' + (self.current * 100) + '%)';
-      // After showing the cloned first slide, silently snap back to real first
-      if (self.current === self.total) {
-        setTimeout(function () {
-          self.track.style.transition = 'none';
-          self.current = 0;
-          self.track.style.transform = 'translateX(0%)';
-        }, 720);
-      }
-    }
-  };
 
   /* --------------------------------------------------------------------------
      12. Collections Menu Dropdown
@@ -750,7 +719,6 @@
     AddToCart.init();
     MobileNav.init();
     CollectionsMenu.init();
-    HeroSlideshow.init();
     SearchOverlay.init();
     Wishlist.init();
     ProductSlideshow.init();
