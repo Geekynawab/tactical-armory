@@ -552,7 +552,45 @@
   };
 
   /* --------------------------------------------------------------------------
-     13. Bulk Savings Tiers
+     13. Sticky ATC Bar
+     -------------------------------------------------------------------------- */
+  var StickyATC = {
+    bar: null,
+    sentinel: null,
+
+    init: function () {
+      this.bar = $('#sticky-atc');
+      if (!this.bar) return;
+
+      // Watch the main ATC form — when it leaves view, show the bar
+      var form = $('[data-add-to-cart-form]');
+      if (!form) return;
+
+      var self = this;
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) {
+            self.bar.classList.add('visible');
+            self.bar.setAttribute('aria-hidden', 'false');
+          } else {
+            self.bar.classList.remove('visible');
+            self.bar.setAttribute('aria-hidden', 'true');
+          }
+        });
+      }, { threshold: 0 });
+
+      observer.observe(form);
+
+      // Clicking sticky ATC submits the real form
+      on($('#sticky-atc-btn'), 'click', function () {
+        var realBtn = $('[data-add-to-cart-form] [type="submit"]');
+        if (realBtn) realBtn.click();
+      });
+    }
+  };
+
+  /* --------------------------------------------------------------------------
+     14. Bulk Savings Tiers
      -------------------------------------------------------------------------- */
   var BulkSavings = {
     init: function () {
@@ -703,6 +741,7 @@
     Wishlist.init();
     ProductSlideshow.init();
     BulkSavings.init();
+    StickyATC.init();
     VariantSelector.init();
     ProductGallery.init();
     AnnouncementBar.init();
