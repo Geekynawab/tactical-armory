@@ -1960,6 +1960,7 @@ h4 { font-size: 1.125rem; }
 .product-slideshow__track {
   display: flex;
   gap: 1rem;
+  align-items: flex-start;
   will-change: transform;
 }
 .product-slideshow__slide {
@@ -1969,9 +1970,8 @@ h4 { font-size: 1.125rem; }
 }
 .product-slideshow__slide img {
   width: 100%;
-  height: 280px;
+  height: auto;
   display: block;
-  object-fit: cover;
 }
 .product-slideshow__btn {
   position: absolute;
