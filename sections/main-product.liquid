@@ -1,53 +1,87 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<!-- Breadcrumb -->
+<div class="product-breadcrumb">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      {%- if collection -%}
+        <span>/</span>
+        <a href="{{ collection.url }}">{{ collection.title }}</a>
+      {%- endif -%}
+      <span>/</span>
+      <span>{{ product.title }}</span>
+    </nav>
+  </div>
+</div>
+
+<!-- Main product layout -->
 <div class="product-page">
   <div class="container">
-    <div class="product-page__grid">
+    <div class="product-layout">
 
-      <!-- Gallery -->
-      <div class="product-gallery">
-        <div class="product-gallery__main">
-          {%- if product.featured_image != blank -%}
-            <img
-              id="gallery-main-img"
-              src="{{ product.featured_image | image_url: width: 800 }}"
-              alt="{{ product.featured_image.alt | default: product.title | escape }}"
-              loading="eager"
-              width="800"
-              height="800">
-          {%- else -%}
-            {{ 'product-1' | placeholder_svg_tag: 'product-gallery__main' }}
+      <!-- LEFT: Sticky gallery -->
+      <div class="product-layout__gallery">
+        <div class="product-gallery">
+          <div class="product-gallery__main">
+            {%- if product.featured_image != blank -%}
+              <img
+                id="gallery-main-img"
+                src="{{ product.featured_image | image_url: width: 900 }}"
+                alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                loading="eager"
+                width="900"
+                height="900">
+            {%- else -%}
+              {{ 'product-1' | placeholder_svg_tag: 'product-gallery__placeholder' }}
+            {%- endif -%}
+          </div>
+          {%- if product.images.size > 1 -%}
+            <div class="product-gallery__thumbs">
+              {%- for image in product.images limit: 6 -%}
+                <button
+                  class="product-gallery__thumb{% if forloop.first %} active{% endif %}"
+                  data-src="{{ image | image_url: width: 900 }}"
+                  aria-label="View image {{ forloop.index }}">
+                  <img
+                    src="{{ image | image_url: width: 120 }}"
+                    alt="{{ image.alt | default: product.title | escape }}"
+                    width="120"
+                    height="120"
+                    loading="lazy">
+                </button>
+              {%- endfor -%}
+            </div>
           {%- endif -%}
         </div>
-
-        {%- if product.images.size > 1 -%}
-          <div class="product-gallery__thumbs">
-            {%- for image in product.images limit: 5 -%}
-              <button
-                class="product-gallery__thumb {% if forloop.first %}active{% endif %}"
-                data-src="{{ image | image_url: width: 800 }}"
-                aria-label="View image {{ forloop.index }}">
-                <img
-                  src="{{ image | image_url: width: 120 }}"
-                  alt="{{ image.alt | default: product.title | escape }}"
-                  width="120"
-                  height="120"
-                  loading="lazy">
-              </button>
-            {%- endfor -%}
-          </div>
-        {%- endif -%}
       </div>
 
-      <!-- Info -->
-      <div class="product-info">
+      <!-- RIGHT: Scrollable info -->
+      <div class="product-layout__info">
 
-        {%- if product.vendor != blank -%}
-          <p class="product-info__collection">{{ product.vendor }}</p>
+        <!-- Category tags -->
+        {%- if collection or product.type != blank or product.vendor != blank -%}
+          <div class="product-info__tags">
+            {%- if collection -%}<span>{{ collection.title }}</span>{%- endif -%}
+            {%- if product.type != blank -%}<span class="tag-sep">|</span><span>{{ product.type }}</span>{%- endif -%}
+            {%- if product.vendor != blank -%}<span class="tag-sep">|</span><span>{{ product.vendor }}</span>{%- endif -%}
+          </div>
         {%- endif -%}
 
-        <h1 class="product-info__title">{{ product.title }}</h1>
+        <!-- Title + wishlist -->
+        <div class="product-info__title-row">
+          <h1 class="product-info__title">{{ product.title }}</h1>
+          <button class="product-icon-btn{% if product.tags contains 'new' %} active{% endif %}"
+            data-wishlist="{{ product.id }}"
+            aria-label="Add to wishlist">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </button>
+        </div>
 
+        <!-- Price -->
         <div class="product-info__price" id="product-price">
-          {%- assign current_variant = product.selected_or_first_available_variant -%}
           {%- assign inflated = current_variant.price | times: 1.3 | ceil -%}
           <span class="sale">{{ current_variant.price | money }}</span>
           <span class="compare-at">{{ inflated | money }}</span>
@@ -55,7 +89,7 @@
 
         <hr class="product-info__divider">
 
-        <!-- Variant data for JS -->
+        <!-- Variant JSON for JS -->
         <script id="product-variants-json" type="application/json">
           [
             {%- for variant in product.variants -%}
@@ -75,14 +109,15 @@
           ]
         </script>
 
+        <!-- Variant selectors -->
         {%- unless product.has_only_default_variant -%}
           {%- for option in product.options_with_values -%}
             <div class="variant-group" data-variant-group="{{ forloop.index0 }}">
-              <p class="variant-label">{{ option.name }}</p>
+              <p class="variant-label">{{ option.name }} <strong>{{ option.selected_value }}</strong></p>
               <div class="variant-buttons">
                 {%- for value in option.values -%}
                   <button
-                    class="variant-btn {% if option.selected_value == value %}active{% endif %}"
+                    class="variant-btn{% if option.selected_value == value %} active{% endif %}"
                     data-option-value="{{ value | escape }}"
                     data-option-index="{{ forloop.parentloop.index0 }}">
                     {{ value }}
@@ -93,23 +128,21 @@
           {%- endfor -%}
         {%- endunless -%}
 
-        <!-- Add to cart form -->
+        <!-- Add to cart -->
         {% form 'product', product, data-add-to-cart-form: '' %}
-          <input type="hidden" name="id" id="variant-id-input" value="{{ product.selected_or_first_available_variant.id }}">
-
+          <input type="hidden" name="id" id="variant-id-input" value="{{ current_variant.id }}">
           <div class="product-info__add-to-cart">
             <div class="product-info__qty">
               <button type="button" onclick="var i=this.nextElementSibling;i.value=Math.max(1,+i.value-1)">−</button>
               <input type="number" name="quantity" value="1" min="1" max="99" aria-label="Quantity">
               <button type="button" onclick="var i=this.previousElementSibling;i.value=Math.min(99,+i.value+1)">+</button>
             </div>
-
             <button
               type="submit"
               class="btn btn--primary"
               style="flex:1"
-              {%- unless product.available %} disabled{%- endunless -%}>
-              {%- if product.available -%}
+              {%- unless current_variant.available %} disabled{%- endunless -%}>
+              {%- if current_variant.available -%}
                 {{ 'products.product.add_to_cart' | t }}
               {%- else -%}
                 {{ 'products.product.sold_out' | t }}
@@ -132,23 +165,63 @@
 
         <hr class="product-info__divider">
 
+        <!-- Description -->
         {%- if product.description != blank -%}
           <div class="product-info__description">
+            <p class="product-info__description-label">Description</p>
             {{ product.description }}
           </div>
         {%- endif -%}
 
-        <!-- Knife legal disclaimer -->
-        {%- if product.type == 'Knife' or product.type == 'Melee' or product.tags contains 'knife' -%}
-          <p style="margin-top:1.5rem;font-size:0.75rem;color:var(--color-text-muted);border-top:1px solid var(--color-border);padding-top:1rem">
-            ⚠️ Blade product: Must be 18+ to purchase. Check local laws before ordering. For collection/cosplay purposes only.
-          </p>
+        <!-- Shop the Collection -->
+        {%- if collection and collection.products_count > 1 -%}
+          <div class="product-related">
+            <p class="product-related__label">Shop the Collection</p>
+            <div class="product-related__scroll">
+              {%- for p in collection.products limit: 6 -%}
+                {%- unless p.id == product.id -%}
+                  <a href="{{ p.url }}" class="product-related__item">
+                    {%- if p.featured_image -%}
+                      <img src="{{ p.featured_image | image_url: width: 120 }}" alt="{{ p.title | escape }}" width="60" height="60" loading="lazy">
+                    {%- endif -%}
+                    <div>
+                      <span class="product-related__title">{{ p.title | truncate: 24 }}</span>
+                      <span class="product-related__price">{{ p.price | money }}</span>
+                    </div>
+                  </a>
+                {%- endunless -%}
+              {%- endfor -%}
+            </div>
+          </div>
         {%- endif -%}
 
       </div>
     </div>
   </div>
 </div>
+
+<!-- Full-width image slideshow -->
+{%- if product.images.size > 1 -%}
+<div class="product-slideshow" id="product-slideshow">
+  <div class="product-slideshow__track" id="product-slideshow-track">
+    {%- for image in product.images -%}
+      <div class="product-slideshow__slide">
+        <img
+          src="{{ image | image_url: width: 900 }}"
+          alt="{{ image.alt | default: product.title | escape }}"
+          loading="lazy"
+          width="900">
+      </div>
+    {%- endfor -%}
+  </div>
+  <button class="product-slideshow__btn product-slideshow__btn--prev" id="slideshow-prev" aria-label="Previous image">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="product-slideshow__btn product-slideshow__btn--next" id="slideshow-next" aria-label="Next image">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+</div>
+{%- endif -%}
 
 {% schema %}
 {

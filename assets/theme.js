@@ -552,7 +552,57 @@
   };
 
   /* --------------------------------------------------------------------------
-     13. Hero Slideshow
+     13. Product Page Image Slideshow
+     -------------------------------------------------------------------------- */
+  var ProductSlideshow = {
+    track: null,
+    slides: [],
+    current: 0,
+    interval: null,
+    slidesPerView: 3,
+
+    init: function () {
+      this.track  = $('#product-slideshow-track');
+      if (!this.track) return;
+      this.slides = $$('.product-slideshow__slide', this.track.parentElement);
+      if (this.slides.length < 2) return;
+
+      var self = this;
+      on($('#slideshow-prev'), 'click', function () { self.move(-1); });
+      on($('#slideshow-next'), 'click', function () { self.move(1); });
+
+      // Pause on hover
+      on(this.track.parentElement, 'mouseenter', function () { self.stop(); });
+      on(this.track.parentElement, 'mouseleave', function () { self.start(); });
+
+      this.start();
+    },
+
+    move: function (dir) {
+      var maxIndex = this.slides.length - this.slidesPerView;
+      this.current = Math.max(0, Math.min(this.current + dir, maxIndex));
+      var offset = -(this.current * (100 / this.slidesPerView));
+      this.track.style.transform = 'translateX(' + offset + '%)';
+
+      // Loop back
+      if (this.current >= this.slides.length - this.slidesPerView) {
+        var self = this;
+        setTimeout(function () { self.current = 0; self.track.style.transition = 'none'; self.track.style.transform = 'translateX(0)'; setTimeout(function () { self.track.style.transition = ''; }, 50); }, 520);
+      }
+    },
+
+    start: function () {
+      var self = this;
+      this.interval = setInterval(function () { self.move(1); }, 800);
+    },
+
+    stop: function () {
+      clearInterval(this.interval);
+    }
+  };
+
+  /* --------------------------------------------------------------------------
+     14. Hero Slideshow
      -------------------------------------------------------------------------- */
   var HeroSlideshow = {
     slides: [],
@@ -628,6 +678,7 @@
     HeroSlideshow.init();
     SearchOverlay.init();
     Wishlist.init();
+    ProductSlideshow.init();
     VariantSelector.init();
     ProductGallery.init();
     AnnouncementBar.init();
