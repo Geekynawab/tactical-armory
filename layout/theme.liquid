@@ -41,6 +41,48 @@
     {%- sections 'announcement-bar' -%}
     {%- sections 'header' -%}
 
+    {%- unless template.name == 'index' -%}
+    <div class="global-breadcrumb">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          {%- case template.name -%}
+            {%- when 'product' -%}
+              {%- if collection -%}
+                <span>/</span>
+                <a href="{{ collection.url }}">{{ collection.title }}</a>
+              {%- endif -%}
+              <span>/</span>
+              <span>{{ product.title }}</span>
+            {%- when 'collection' -%}
+              <span>/</span>
+              <span>{{ collection.title }}</span>
+            {%- when 'page' -%}
+              <span>/</span>
+              <span>{{ page.title }}</span>
+            {%- when 'blog' -%}
+              <span>/</span>
+              <span>{{ blog.title }}</span>
+            {%- when 'article' -%}
+              <span>/</span>
+              <a href="{{ blog.url }}">{{ blog.title }}</a>
+              <span>/</span>
+              <span>{{ article.title }}</span>
+            {%- when 'search' -%}
+              <span>/</span>
+              <span>Search Results</span>
+            {%- when 'cart' -%}
+              <span>/</span>
+              <span>Cart</span>
+            {%- when '404' -%}
+              <span>/</span>
+              <span>Page Not Found</span>
+          {%- endcase -%}
+        </nav>
+      </div>
+    </div>
+    {%- endunless -%}
+
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>

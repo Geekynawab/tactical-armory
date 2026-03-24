@@ -1,20 +1,5 @@
 {%- assign current_variant = product.selected_or_first_available_variant -%}
 
-<!-- Breadcrumb -->
-<div class="product-breadcrumb">
-  <div class="container">
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="/">Home</a>
-      {%- if collection -%}
-        <span>/</span>
-        <a href="{{ collection.url }}">{{ collection.title }}</a>
-      {%- endif -%}
-      <span>/</span>
-      <span>{{ product.title }}</span>
-    </nav>
-  </div>
-</div>
-
 <!-- Main product layout -->
 <div class="product-page">
   <div class="container">
