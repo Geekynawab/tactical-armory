@@ -3360,15 +3360,21 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 }
 
 .wc-group__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 0.6rem;
 }
+.wc-group__grid .wc-item {
+  flex: 0 0 88px;
+}
 
-/* Featured row — exactly 3 cols, larger items, bottom gap before rest */
+/* Featured row — exactly 3 items centered, larger */
 .wc-group__grid--featured {
-  grid-template-columns: repeat(3, 1fr);
   margin-bottom: 0.6rem;
+}
+.wc-group__grid--featured .wc-item {
+  flex: 0 0 160px;
 }
 .wc-item--featured {
   padding: 1.25rem 0.75rem 1rem;
