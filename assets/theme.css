@@ -249,10 +249,13 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   text-transform: uppercase;
   border: 2px solid transparent;
   clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-  transition: background-color var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast);
+  transition: background-color var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast), transform 0.1s ease;
   white-space: nowrap;
   position: relative;
   overflow: hidden;
+}
+.btn:active {
+  transform: scale(0.97);
 }
 
 .btn--primary {
