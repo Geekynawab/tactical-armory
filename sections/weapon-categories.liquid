@@ -9,8 +9,8 @@
       </div>
       <!-- Featured row: Phantom, Vandal, Classic -->
       <div class="wc-group__grid wc-group__grid--featured">
-        {%- assign featured_guns = "Phantom,Vandal,Operator,Classic" | split: "," -%}
-        {%- assign featured_types = "rifle,rifle,sniper,pistol" | split: "," -%}
+        {%- assign featured_guns = "Vandal,Phantom,Guardian" | split: "," -%}
+        {%- assign featured_types = "rifle,rifle,rifle" | split: "," -%}
         {%- for gun in featured_guns -%}
           {%- assign slug = gun | downcase | replace: ' ', '-' -%}
           <a href="/collections/{{ slug }}" class="wc-item wc-item--featured wc-item--{{ featured_types[forloop.index0] }}">
@@ -30,8 +30,8 @@
 
       <!-- Rest of guns -->
       <div class="wc-group__grid">
-        {%- assign guns = "Shorty,Frenzy,Ghost,Sheriff,Stinger,Spectre,Bucky,Judge,Bulldog,Guardian,Marshal,Ares,Odin" | split: "," -%}
-        {%- assign gun_types = "pistol,pistol,pistol,pistol,smg,smg,shotgun,shotgun,rifle,rifle,sniper,lmg,lmg" | split: "," -%}
+        {%- assign guns = "Classic,Sheriff,Spectre" | split: "," -%}
+        {%- assign gun_types = "pistol,pistol,smg" | split: "," -%}
         {%- for gun in guns -%}
           {%- assign slug = gun | downcase | replace: ' ', '-' -%}
           <a href="/collections/{{ slug }}" class="wc-item wc-item--{{ gun_types[forloop.index0] }}">
@@ -58,11 +58,12 @@
       </div>
       <div class="wc-group__grid">
 
-        {%- assign melees = "Karambit,Butterfly,M9 Bayonet,Stiletto,Huntsman,Bowie,Gut,Talon,Kunai,Skeleton,Shadow Daggers,Ursus,Navaja,Falchion,Flip,Classic Knife" | split: "," -%}
+        {%- assign melees = "Butterfly Knife,Knife & Dagger,Karambit,Axe,Sword & Katana,Claws & Dual Blades" | split: "," -%}
+        {%- assign melee_slugs = "butterfly-knife,knife-dagger,karambit,axe,sword-katana,claws-dual-blades" | split: "," -%}
+        {%- assign melee_counts = "8,9,5,2,2,2" | split: "," -%}
 
         {%- for melee in melees -%}
-          {%- assign slug = melee | downcase | replace: ' ', '-' -%}
-          <a href="/collections/{{ slug }}" class="wc-item wc-item--melee">
+          <a href="/collections/{{ melee_slugs[forloop.index0] }}" class="wc-item wc-item--melee">
             <div class="wc-item__icon">
               <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <line x1="8" y1="32" x2="32" y2="8" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
@@ -72,7 +73,7 @@
               </svg>
             </div>
             <span class="wc-item__name">{{ melee }}</span>
-            <span class="wc-item__type">MELEE</span>
+            <span class="wc-item__type">{{ melee_counts[forloop.index0] }} ITEMS</span>
           </a>
         {%- endfor -%}
 
