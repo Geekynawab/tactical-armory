@@ -12,6 +12,10 @@
         "cta2_link": "/collections/keychains"
       }
     },
+    "weapon-categories": {
+      "type": "weapon-categories",
+      "settings": {}
+    },
     "collection-categories": {
       "type": "collection-categories",
       "settings": {},
@@ -96,12 +100,12 @@
       },
       "blocks_order": ["rev-1","rev-2","rev-3"]
     },
-    "blog-preview": {
-      "type": "blog-preview",
+    "journal": {
+      "type": "journal",
       "settings": {
-        "eyebrow": "From the vault",
-        "heading": "LATEST NEWS",
-        "posts_to_show": 3
+        "eyebrow": "Stay Informed",
+        "heading": "JOURNAL",
+        "posts_to_show": 4
       }
     },
     "faq": {
@@ -131,6 +135,7 @@
   },
   "order": [
     "hero-banner",
+    "weapon-categories",
     "collection-categories",
     "trust-bar",
     "flash-sales",
@@ -140,7 +145,7 @@
     "latest-drop",
     "gun-buddy-gallery",
     "testimonials",
-    "blog-preview",
+    "journal",
     "faq",
     "newsletter"
   ]

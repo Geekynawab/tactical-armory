@@ -1,0 +1,99 @@
+{%- assign blog_handle = section.settings.blog | default: 'news' -%}
+{%- assign journal_blog = blogs[blog_handle] -%}
+
+{%- if journal_blog.articles.size > 0 -%}
+<section class="section journal-section">
+  <div class="container">
+
+    <div class="section-header">
+      <div class="section-header__title-wrap">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="section-subtitle">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 class="section-title">{{ section.settings.heading | default: 'JOURNAL' }}</h2>
+        <span class="section-divider"></span>
+      </div>
+      <a href="{{ journal_blog.url }}" class="btn btn--outline btn--sm">All Posts</a>
+    </div>
+
+    <div class="journal-layout">
+
+      <!-- Featured article (first/largest) -->
+      {%- assign featured = journal_blog.articles.first -%}
+      <a href="{{ featured.url }}" class="journal-featured">
+        {%- if featured.image != blank -%}
+          <div class="journal-featured__image">
+            <img
+              src="{{ featured.image | image_url: width: 900 }}"
+              alt="{{ featured.image.alt | default: featured.title | escape }}"
+              loading="lazy"
+              width="900"
+              height="540">
+          </div>
+        {%- endif -%}
+        <div class="journal-featured__body">
+          {%- if featured.tags.size > 0 -%}
+            <span class="journal-tag">{{ featured.tags.first }}</span>
+          {%- endif -%}
+          <h3 class="journal-featured__title">{{ featured.title }}</h3>
+          <p class="journal-featured__excerpt">{{ featured.excerpt_or_content | strip_html | truncate: 140 }}</p>
+          <div class="journal-featured__meta">
+            <span>{{ featured.author }}</span>
+            <span class="journal-meta-sep">·</span>
+            <time>{{ featured.published_at | date: "%b %d, %Y" }}</time>
+          </div>
+          <span class="journal-read-more">Read Article →</span>
+        </div>
+      </a>
+
+      <!-- Side articles -->
+      <div class="journal-side">
+        {%- for article in journal_blog.articles limit: section.settings.posts_to_show -%}
+          {%- unless forloop.first -%}
+            <a href="{{ article.url }}" class="journal-card">
+              {%- if article.image != blank -%}
+                <div class="journal-card__image">
+                  <img
+                    src="{{ article.image | image_url: width: 300 }}"
+                    alt="{{ article.image.alt | default: article.title | escape }}"
+                    loading="lazy"
+                    width="300"
+                    height="200">
+                </div>
+              {%- endif -%}
+              <div class="journal-card__body">
+                {%- if article.tags.size > 0 -%}
+                  <span class="journal-tag">{{ article.tags.first }}</span>
+                {%- endif -%}
+                <h4 class="journal-card__title">{{ article.title }}</h4>
+                <time class="journal-card__date">{{ article.published_at | date: "%b %d, %Y" }}</time>
+              </div>
+            </a>
+          {%- endunless -%}
+        {%- endfor -%}
+      </div>
+
+    </div>
+
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Journal",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Stay Informed" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "JOURNAL" },
+    { "type": "blog", "id": "blog", "label": "Blog" },
+    { "type": "range", "id": "posts_to_show", "label": "Total posts (1 featured + rest as cards)", "min": 2, "max": 5, "step": 1, "default": 4 }
+  ],
+  "presets": [
+    {
+      "name": "Journal",
+      "settings": { "eyebrow": "Stay Informed", "heading": "JOURNAL", "posts_to_show": 4 }
+    }
+  ]
+}
+{% endschema %}
