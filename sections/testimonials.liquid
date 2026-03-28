@@ -1,0 +1,109 @@
+<section class="section testimonials">
+  <div class="container">
+
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="section-subtitle">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    <h2 class="section-title">{{ section.settings.heading | default: 'Trusted by Players' }}</h2>
+    <span class="section-divider"></span>
+
+    <!-- Pro endorsement -->
+    {%- if section.settings.pro_quote != blank -%}
+      <div class="testimonials__pro">
+        <div class="testimonials__pro-avatar">
+          {%- if section.settings.pro_image != blank -%}
+            <img src="{{ section.settings.pro_image | image_url: width: 120 }}" alt="{{ section.settings.pro_name | escape }}" width="120" height="120" loading="lazy">
+          {%- else -%}
+            <div class="testimonials__pro-avatar-placeholder">{{ section.settings.pro_name | slice: 0, 1 | upcase }}</div>
+          {%- endif -%}
+        </div>
+        <div class="testimonials__pro-body">
+          <blockquote class="testimonials__pro-quote">"{{ section.settings.pro_quote }}"</blockquote>
+          <p class="testimonials__pro-name">{{ section.settings.pro_name }}</p>
+          <p class="testimonials__pro-role">{{ section.settings.pro_role }}</p>
+        </div>
+      </div>
+    {%- endif -%}
+
+    <!-- Customer reviews grid -->
+    {%- if section.blocks.size > 0 -%}
+      <div class="testimonials__grid">
+        {%- for block in section.blocks -%}
+          <div class="testimonial-card" {{ block.shopify_attributes }}>
+            <div class="testimonial-card__stars">
+              {%- for i in (1..5) -%}★{%- endfor -%}
+            </div>
+            <p class="testimonial-card__text">"{{ block.settings.text }}"</p>
+            <div class="testimonial-card__author">
+              <span class="testimonial-card__name">{{ block.settings.name }}</span>
+              {%- if block.settings.location != blank -%}
+                <span class="testimonial-card__location">{{ block.settings.location }}</span>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Media logos -->
+    {%- if section.settings.show_media_logos -%}
+      <div class="testimonials__media">
+        <p class="testimonials__media-label">AS SEEN IN</p>
+        <div class="testimonials__media-logos">
+          <span class="media-logo">DEXERTO</span>
+          <span class="media-logo">HLTV</span>
+          <span class="media-logo">DREAMHACK</span>
+          <span class="media-logo">ESL</span>
+          <span class="media-logo">VLRT.GG</span>
+        </div>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Community" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "TRUSTED BY PLAYERS" },
+    { "type": "header", "content": "Pro Endorsement" },
+    { "type": "image_picker", "id": "pro_image", "label": "Pro photo" },
+    { "type": "text", "id": "pro_name", "label": "Pro name", "default": "TenZ" },
+    { "type": "text", "id": "pro_role", "label": "Role / Team", "default": "Pro Player — Sentinels" },
+    { "type": "textarea", "id": "pro_quote", "label": "Quote", "default": "The most accurate Valorant knife replicas I've ever seen. Insane quality." },
+    { "type": "checkbox", "id": "show_media_logos", "label": "Show media logos", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "textarea", "id": "text", "label": "Review text", "default": "Incredible quality, looks exactly like in-game. Shipped fast too!" },
+        { "type": "text", "id": "name", "label": "Customer name", "default": "Alex K." },
+        { "type": "text", "id": "location", "label": "Location", "default": "United States" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "settings": {
+        "eyebrow": "Community",
+        "heading": "TRUSTED BY PLAYERS",
+        "pro_name": "TenZ",
+        "pro_role": "Pro Player — Sentinels",
+        "pro_quote": "The most accurate Valorant knife replicas I've ever seen. Insane quality.",
+        "show_media_logos": true
+      },
+      "blocks": [
+        { "type": "review", "settings": { "text": "Arrived in 3 days and looks exactly like my in-game skin. Obsessed.", "name": "Jake M.", "location": "UK" } },
+        { "type": "review", "settings": { "text": "Got the Reaver karambit — the detail is unreal. Worth every penny.", "name": "Sarah L.", "location": "Canada" } },
+        { "type": "review", "settings": { "text": "Best merch I've bought as a Valorant fan. Ships fast, packaged perfectly.", "name": "Diego R.", "location": "Spain" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
