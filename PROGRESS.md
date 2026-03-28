@@ -14,10 +14,10 @@ Track progress of all visual/UX upgrades on top of the cloned base theme.
 - [x] **6. Product card hover** — Scale + border glow + metallic glare sweep + HUD stats overlay slide-in
 - [x] **7. Button press animation** — Scale press-down (0.97) on click for all CTAs
 - [x] **8. Toast notifications** — Elimination-feed style (dark pill, red left border, slides from top-right)
-- [ ] **9. Circular Gallery** — Featured bundle rotating knife carousel on homepage
-- [ ] **10. Gun-Buddy Masonry** — Variable-height keychain collection grid layout
-- [ ] **11. HUD stat chips** — Tactical labels on product pages `[MATERIAL: STEEL]` `[GRADE: A]`
-- [ ] **12. Inspect lightbox** — Full-screen product image viewer with dark bg + crosshair cursor
+- [x] **9. Circular Gallery** — Featured bundle rotating knife carousel on homepage
+- [x] **10. Gun-Buddy Masonry** — Variable-height keychain collection grid layout
+- [x] **11. HUD stat chips** — Tactical labels on product pages `[MATERIAL: STEEL]` `[GRADE: A]`
+- [x] **12. Inspect lightbox** — Full-screen product image viewer with dark bg + crosshair cursor
 
 ---
 
