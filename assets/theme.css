@@ -3363,6 +3363,19 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   gap: 0.6rem;
 }
 
+/* Featured row — exactly 3 cols, larger items, bottom gap before rest */
+.wc-group__grid--featured {
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 0.6rem;
+}
+.wc-item--featured {
+  padding: 1.25rem 0.75rem 1rem;
+  border-color: rgba(239,68,68,0.25);
+}
+.wc-item--featured .wc-item__icon { width: 44px; height: 44px; }
+.wc-item--featured .wc-item__name { font-size: 0.72rem; }
+.wc-item--featured:hover { border-color: var(--color-accent); }
+
 .wc-item {
   display: flex;
   flex-direction: column;
