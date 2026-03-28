@@ -27,7 +27,7 @@
       {%- endif -%}
 
       {%- if section.settings.heading != blank -%}
-        <h1 class="hero-banner__title">
+        <h1 class="hero-banner__title glitch" data-text="{{ section.settings.heading | split: '|' | join: '' | strip_html }}">
           {%- assign title_parts = section.settings.heading | split: '|' -%}
           {%- if title_parts.size > 1 -%}
             {{ title_parts[0] }}<em>{{ title_parts[1] }}</em>{{ title_parts[2] }}
