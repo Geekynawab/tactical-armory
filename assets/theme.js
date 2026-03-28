@@ -203,7 +203,7 @@
         body: JSON.stringify({ id: payload.id, quantity: parseInt(payload.quantity, 10) || 1 })
       })
         .then(function (r) { return r.json(); })
-        .then(function () {
+        .then(function (item) {
           if (submitBtn) {
             submitBtn.textContent = 'Added!';
             setTimeout(function () {
@@ -212,6 +212,7 @@
               submitBtn.textContent = 'Add to Cart';
             }, 1500);
           }
+          if (window.ValorantToast) window.ValorantToast.show('ITEM ACQUIRED', item.title || 'Added to inventory', 'success');
           CartDrawer.open();
         })
         .catch(function () {
@@ -220,6 +221,7 @@
             submitBtn.classList.remove('loading');
             submitBtn.textContent = 'Error — Try Again';
           }
+          if (window.ValorantToast) window.ValorantToast.show('FAILED', 'Could not add item', 'error');
         });
     },
 
@@ -231,12 +233,14 @@
         body: JSON.stringify({ id: variantId, quantity: qty })
       })
         .then(function (r) { return r.json(); })
-        .then(function () {
+        .then(function (item) {
           if (btn) { btn.disabled = false; btn.textContent = 'Added!'; setTimeout(function () { btn.textContent = 'Quick Add'; }, 1500); }
+          if (window.ValorantToast) window.ValorantToast.show('ITEM ACQUIRED', item.title || 'Added to inventory', 'success');
           CartDrawer.open();
         })
         .catch(function () {
           if (btn) { btn.disabled = false; btn.textContent = 'Error'; }
+          if (window.ValorantToast) window.ValorantToast.show('FAILED', 'Could not add item', 'error');
         });
     }
   };
@@ -1029,6 +1033,35 @@
         chatBtn.style.opacity = nearBottom ? '1' : '0';
         chatBtn.style.pointerEvents = nearBottom ? 'auto' : 'none';
       }, { passive: true });
+    }());
+
+    // Toast notification system — Valorant elimination-feed style
+    window.ValorantToast = (function () {
+      var container = document.getElementById('toast-container');
+      function show(title, sub, type) {
+        if (!container) return;
+        var toast = document.createElement('div');
+        toast.className = 'toast toast--' + (type || 'success');
+        toast.innerHTML =
+          '<svg class="toast__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+            (type === 'error'
+              ? '<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>'
+              : '<polyline points="20 6 9 17 4 12"/>') +
+          '</svg>' +
+          '<div class="toast__body">' +
+            '<p class="toast__title">' + title + '</p>' +
+            (sub ? '<p class="toast__sub">' + sub + '</p>' : '') +
+          '</div>' +
+          '<button class="toast__close" aria-label="Dismiss">&times;</button>';
+        container.appendChild(toast);
+        toast.querySelector('.toast__close').addEventListener('click', function () { dismiss(toast); });
+        setTimeout(function () { dismiss(toast); }, 3500);
+      }
+      function dismiss(toast) {
+        toast.classList.add('toast--exit');
+        toast.addEventListener('animationend', function () { toast.remove(); }, { once: true });
+      }
+      return { show: show };
     }());
 
     // Product card spotlight — track cursor position as CSS variables
