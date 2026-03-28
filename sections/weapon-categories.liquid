@@ -7,46 +7,110 @@
         <span class="wc-group__label">ALL GUNS</span>
         <span class="wc-group__line"></span>
       </div>
-      <!-- Featured row: Phantom, Vandal, Classic -->
+
+      <!-- Featured row: Vandal, Phantom, Sheriff -->
       <div class="wc-group__grid wc-group__grid--featured">
-        {%- assign featured_guns = "Vandal,Phantom,Sheriff" | split: "," -%}
-        {%- assign featured_types = "rifle,rifle,pistol" | split: "," -%}
-        {%- for gun in featured_guns -%}
-          {%- assign slug = gun | downcase | replace: ' ', '-' -%}
-          <a href="/collections/{{ slug }}" class="wc-item wc-item--featured wc-item--{{ featured_types[forloop.index0] }}">
-            <div class="wc-item__icon">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <rect x="4" y="14" width="28" height="8" rx="1" fill="currentColor" opacity="0.9"/>
-                <rect x="28" y="12" width="8" height="4" rx="0.5" fill="currentColor" opacity="0.7"/>
-                <rect x="10" y="22" width="6" height="8" rx="1" fill="currentColor" opacity="0.6"/>
-                <circle cx="8" cy="18" r="2" fill="var(--color-accent)" opacity="0.8"/>
-              </svg>
-            </div>
-            <span class="wc-item__name">{{ gun }}</span>
-            <span class="wc-item__type">{{ featured_types[forloop.index0] | upcase }}</span>
-          </a>
-        {%- endfor -%}
+
+        <!-- Vandal: chunky AK-style body + curved mag -->
+        <a href="/collections/vandal" class="wc-item wc-item--featured wc-item--rifle">
+          <div class="wc-item__icon">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="3" y="15" width="24" height="8" rx="1" fill="currentColor"/>
+              <rect x="27" y="16" width="9" height="5" rx="0.5" fill="currentColor" opacity="0.85"/>
+              <path d="M13 23 Q11 30 14 31 Q17 31 17 23Z" fill="currentColor" opacity="0.75"/>
+              <rect x="4" y="23" width="5" height="8" rx="1" fill="currentColor" opacity="0.7"/>
+              <circle cx="36" cy="18.5" r="2" fill="var(--color-accent)"/>
+            </svg>
+          </div>
+          <span class="wc-item__name">Vandal</span>
+          <span class="wc-item__type">RIFLE</span>
+        </a>
+
+        <!-- Phantom: sleek body + suppressor -->
+        <a href="/collections/phantom" class="wc-item wc-item--featured wc-item--rifle">
+          <div class="wc-item__icon">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="5" y="15" width="20" height="7" rx="0.5" fill="currentColor"/>
+              <rect x="25" y="16" width="12" height="4" rx="2" fill="currentColor" opacity="0.8"/>
+              <rect x="14" y="22" width="5" height="9" rx="0.5" fill="currentColor" opacity="0.7"/>
+              <rect x="5" y="22" width="5" height="8" rx="1" fill="currentColor" opacity="0.65"/>
+              <circle cx="37" cy="18" r="2" fill="var(--color-accent)"/>
+            </svg>
+          </div>
+          <span class="wc-item__name">Phantom</span>
+          <span class="wc-item__type">RIFLE</span>
+        </a>
+
+        <!-- Sheriff: long barrel + visible revolver cylinder -->
+        <a href="/collections/sheriff" class="wc-item wc-item--featured wc-item--pistol">
+          <div class="wc-item__icon">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="18" y="14" width="19" height="5" rx="0.5" fill="currentColor"/>
+              <rect x="6" y="14" width="16" height="9" rx="1" fill="currentColor" opacity="0.9"/>
+              <circle cx="13" cy="18" r="5" fill="none" stroke="currentColor" stroke-width="2" opacity="0.65"/>
+              <rect x="8" y="23" width="6" height="10" rx="1" fill="currentColor" opacity="0.7"/>
+              <circle cx="37" cy="16.5" r="2" fill="var(--color-accent)"/>
+            </svg>
+          </div>
+          <span class="wc-item__name">Sheriff</span>
+          <span class="wc-item__type">PISTOL</span>
+        </a>
+
       </div>
 
       <!-- Rest of guns -->
       <div class="wc-group__grid">
-        {%- assign guns = "Classic,Spectre,Guardian" | split: "," -%}
-        {%- assign gun_types = "pistol,smg,rifle" | split: "," -%}
-        {%- for gun in guns -%}
-          {%- assign slug = gun | downcase | replace: ' ', '-' -%}
-          <a href="/collections/{{ slug }}" class="wc-item wc-item--{{ gun_types[forloop.index0] }}">
-            <div class="wc-item__icon">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <rect x="4" y="14" width="28" height="8" rx="1" fill="currentColor" opacity="0.9"/>
-                <rect x="28" y="12" width="8" height="4" rx="0.5" fill="currentColor" opacity="0.7"/>
-                <rect x="10" y="22" width="6" height="8" rx="1" fill="currentColor" opacity="0.6"/>
-                <circle cx="8" cy="18" r="2" fill="var(--color-accent)" opacity="0.8"/>
-              </svg>
-            </div>
-            <span class="wc-item__name">{{ gun }}</span>
-            <span class="wc-item__type">{{ gun_types[forloop.index0] | upcase }}</span>
-          </a>
-        {%- endfor -%}
+
+        <!-- Classic: compact pistol + slide serrations -->
+        <a href="/collections/classic" class="wc-item wc-item--pistol">
+          <div class="wc-item__icon">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="10" y="14" width="22" height="7" rx="0.5" fill="currentColor"/>
+              <rect x="6" y="14" width="10" height="7" rx="0.5" fill="currentColor" opacity="0.85"/>
+              <rect x="22" y="14" width="1.5" height="7" rx="0.3" fill="white" opacity="0.12"/>
+              <rect x="25" y="14" width="1.5" height="7" rx="0.3" fill="white" opacity="0.12"/>
+              <rect x="28" y="14" width="1.5" height="7" rx="0.3" fill="white" opacity="0.12"/>
+              <rect x="7" y="21" width="6" height="10" rx="1" fill="currentColor" opacity="0.7"/>
+              <circle cx="32" cy="17.5" r="2" fill="var(--color-accent)"/>
+            </svg>
+          </div>
+          <span class="wc-item__name">Classic</span>
+          <span class="wc-item__type">PISTOL</span>
+        </a>
+
+        <!-- Spectre: compact SMG + vertical mag + stock nub -->
+        <a href="/collections/spectre" class="wc-item wc-item--smg">
+          <div class="wc-item__icon">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="4" y="15" width="20" height="7" rx="1" fill="currentColor"/>
+              <rect x="24" y="16" width="11" height="4" rx="0.5" fill="currentColor" opacity="0.8"/>
+              <rect x="2" y="15" width="4" height="5" rx="1" fill="currentColor" opacity="0.6"/>
+              <rect x="11" y="22" width="5" height="10" rx="0.5" fill="currentColor" opacity="0.7"/>
+              <rect x="4" y="22" width="5" height="8" rx="1" fill="currentColor" opacity="0.65"/>
+              <circle cx="35" cy="18" r="2" fill="var(--color-accent)"/>
+            </svg>
+          </div>
+          <span class="wc-item__name">Spectre</span>
+          <span class="wc-item__type">SMG</span>
+        </a>
+
+        <!-- Guardian: DMR + scope -->
+        <a href="/collections/guardian" class="wc-item wc-item--rifle">
+          <div class="wc-item__icon">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="4" y="16" width="26" height="7" rx="0.5" fill="currentColor"/>
+              <rect x="30" y="17" width="7" height="4" rx="0.5" fill="currentColor" opacity="0.85"/>
+              <rect x="12" y="10" width="12" height="6" rx="2" fill="currentColor" opacity="0.7"/>
+              <circle cx="23" cy="13" r="2" fill="var(--color-accent)" opacity="0.6"/>
+              <rect x="15" y="23" width="5" height="9" rx="0.5" fill="currentColor" opacity="0.7"/>
+              <rect x="5" y="23" width="5" height="8" rx="1" fill="currentColor" opacity="0.65"/>
+              <circle cx="37" cy="19" r="1.5" fill="var(--color-accent)"/>
+            </svg>
+          </div>
+          <span class="wc-item__name">Guardian</span>
+          <span class="wc-item__type">RIFLE</span>
+        </a>
+
       </div>
     </div>
 
@@ -58,24 +122,89 @@
       </div>
       <div class="wc-group__grid">
 
-        {%- assign melees = "Butterfly Knife,Knife & Dagger,Karambit,Axe,Sword & Katana,Claws & Dual Blades" | split: "," -%}
-        {%- assign melee_slugs = "butterfly-knife,knife-dagger,karambit,axe,sword-katana,claws-dual-blades" | split: "," -%}
-        {%- assign melee_counts = "8,9,5,2,2,2" | split: "," -%}
+        <!-- Butterfly Knife: two fanned handles + blade -->
+        <a href="/collections/butterfly-knife" class="wc-item wc-item--melee">
+          <div class="wc-item__icon">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M5 18 L18 13 L19 16 L6 21Z" fill="currentColor" opacity="0.8"/>
+              <path d="M5 22 L18 27 L19 24 L6 19Z" fill="currentColor" opacity="0.8"/>
+              <path d="M18 18 L37 19.5 L18 22Z" fill="currentColor"/>
+              <circle cx="37" cy="19.5" r="1.5" fill="var(--color-accent)"/>
+            </svg>
+          </div>
+          <span class="wc-item__name">Butterfly Knife</span>
+          <span class="wc-item__type">8 ITEMS</span>
+        </a>
 
-        {%- for melee in melees -%}
-          <a href="/collections/{{ melee_slugs[forloop.index0] }}" class="wc-item wc-item--melee">
-            <div class="wc-item__icon">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <line x1="8" y1="32" x2="32" y2="8" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                <polygon points="32,8 28,12 30,14" fill="currentColor" opacity="0.7"/>
-                <rect x="6" y="30" width="6" height="4" rx="1" fill="currentColor" opacity="0.6" transform="rotate(-45 9 32)"/>
-                <circle cx="32" cy="8" r="2" fill="var(--color-accent)"/>
-              </svg>
-            </div>
-            <span class="wc-item__name">{{ melee }}</span>
-            <span class="wc-item__type">{{ melee_counts[forloop.index0] }} ITEMS</span>
-          </a>
-        {%- endfor -%}
+        <!-- Knife & Dagger: diagonal double-edge blade + guard -->
+        <a href="/collections/knife-dagger" class="wc-item wc-item--melee">
+          <div class="wc-item__icon">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M8 34 L10 32 L30 10 L28 8 L26 10 L8 32Z" fill="currentColor" opacity="0.9"/>
+              <rect x="18" y="19" width="8" height="2.5" rx="1" fill="currentColor" opacity="0.65" transform="rotate(45 22 20)"/>
+              <circle cx="29" cy="9" r="2" fill="var(--color-accent)"/>
+            </svg>
+          </div>
+          <span class="wc-item__name">Knife & Dagger</span>
+          <span class="wc-item__type">9 ITEMS</span>
+        </a>
+
+        <!-- Karambit: curved hook blade + finger ring -->
+        <a href="/collections/karambit" class="wc-item wc-item--melee">
+          <div class="wc-item__icon">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M10 30 Q8 14 24 12 Q36 12 36 22 Q36 32 26 32" stroke="currentColor" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+              <circle cx="10" cy="30" r="5" fill="none" stroke="currentColor" stroke-width="2" opacity="0.7"/>
+              <circle cx="26" cy="32" r="2" fill="var(--color-accent)"/>
+            </svg>
+          </div>
+          <span class="wc-item__name">Karambit</span>
+          <span class="wc-item__type">5 ITEMS</span>
+        </a>
+
+        <!-- Axe: handle + wedge head -->
+        <a href="/collections/axe" class="wc-item wc-item--melee">
+          <div class="wc-item__icon">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="16" y="4" width="3.5" height="32" rx="1.5" fill="currentColor" opacity="0.7"/>
+              <path d="M19.5 7 Q32 9 32 20 Q32 29 19.5 32Z" fill="currentColor" opacity="0.9"/>
+              <circle cx="32" cy="20" r="2" fill="var(--color-accent)"/>
+            </svg>
+          </div>
+          <span class="wc-item__name">Axe</span>
+          <span class="wc-item__type">2 ITEMS</span>
+        </a>
+
+        <!-- Sword & Katana: long diagonal blade + tsuba guard -->
+        <a href="/collections/sword-katana" class="wc-item wc-item--melee">
+          <div class="wc-item__icon">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M5 35 Q20 28 34 5" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+              <path d="M7 33 Q21 27 33 6" stroke="white" stroke-width="0.75" opacity="0.2" fill="none"/>
+              <ellipse cx="12" cy="28" rx="5" ry="2" fill="currentColor" opacity="0.65" transform="rotate(-55 12 28)"/>
+              <circle cx="34" cy="5" r="2" fill="var(--color-accent)"/>
+            </svg>
+          </div>
+          <span class="wc-item__name">Sword & Katana</span>
+          <span class="wc-item__type">2 ITEMS</span>
+        </a>
+
+        <!-- Claws & Dual Blades: knuckle grip + three spreading claws -->
+        <a href="/collections/claws-dual-blades" class="wc-item wc-item--melee">
+          <div class="wc-item__icon">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="12" y="22" width="16" height="9" rx="2" fill="currentColor" opacity="0.75"/>
+              <path d="M15 22 L9 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+              <path d="M20 22 L20 4" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+              <path d="M25 22 L31 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="9" cy="6" r="2" fill="var(--color-accent)"/>
+              <circle cx="20" cy="4" r="2" fill="var(--color-accent)"/>
+              <circle cx="31" cy="6" r="2" fill="var(--color-accent)"/>
+            </svg>
+          </div>
+          <span class="wc-item__name">Claws & Dual Blades</span>
+          <span class="wc-item__type">2 ITEMS</span>
+        </a>
 
       </div>
     </div>
