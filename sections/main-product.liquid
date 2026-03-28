@@ -82,7 +82,31 @@
 
         <!-- Title -->
         <div class="product-info__title-row">
-          <h1 class="product-info__title">{{ product.title }}</h1>
+          <h1 class="product-info__title glitch" data-text="{{ product.title | escape }}">{{ product.title }}</h1>
+        </div>
+
+        <!-- HUD stat chips -->
+        <div class="product-hud-chips">
+          {%- if product.type != blank -%}
+            <span class="hud-chip">{{ product.type | upcase }}</span>
+          {%- endif -%}
+          {%- if product.vendor != blank -%}
+            <span class="hud-chip">{{ product.vendor | upcase }}</span>
+          {%- endif -%}
+          {%- assign weight_g = product.variants.first.weight -%}
+          {%- if weight_g and weight_g > 0 -%}
+            <span class="hud-chip">{{ weight_g }}G</span>
+          {%- endif -%}
+          {%- if product.available -%}
+            <span class="hud-chip hud-chip--teal">IN STOCK</span>
+          {%- else -%}
+            <span class="hud-chip hud-chip--red">SOLD OUT</span>
+          {%- endif -%}
+          {%- for tag in product.tags limit: 3 -%}
+            {%- unless tag == 'new' or tag == 'sale' -%}
+              <span class="hud-chip">{{ tag | upcase }}</span>
+            {%- endunless -%}
+          {%- endfor -%}
         </div>
 
         <!-- Price -->

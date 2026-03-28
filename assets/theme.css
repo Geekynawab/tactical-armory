@@ -1579,6 +1579,15 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   padding: 0.15rem 0.4rem;
   background: rgba(0,255,194,0.05);
 }
+.hud-chip--teal { color: var(--color-accent-teal); border-color: rgba(0,255,194,0.4); background: rgba(0,255,194,0.08); }
+.hud-chip--red  { color: var(--color-accent); border-color: rgba(255,70,85,0.4); background: rgba(255,70,85,0.08); }
+
+.product-hud-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
 .product-card__hud-name {
   font-family: var(--font-subhead);
   font-size: 0.75rem;
