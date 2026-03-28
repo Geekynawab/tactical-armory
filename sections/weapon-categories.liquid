@@ -9,8 +9,8 @@
       </div>
       <!-- Featured row: Phantom, Vandal, Classic -->
       <div class="wc-group__grid wc-group__grid--featured">
-        {%- assign featured_guns = "Phantom,Vandal,Classic" | split: "," -%}
-        {%- assign featured_types = "rifle,rifle,pistol" | split: "," -%}
+        {%- assign featured_guns = "Phantom,Vandal,Operator,Classic" | split: "," -%}
+        {%- assign featured_types = "rifle,rifle,sniper,pistol" | split: "," -%}
         {%- for gun in featured_guns -%}
           {%- assign slug = gun | downcase | replace: ' ', '-' -%}
           <a href="/collections/{{ slug }}" class="wc-item wc-item--featured wc-item--{{ featured_types[forloop.index0] }}">
@@ -30,8 +30,8 @@
 
       <!-- Rest of guns -->
       <div class="wc-group__grid">
-        {%- assign guns = "Shorty,Frenzy,Ghost,Sheriff,Stinger,Spectre,Bucky,Judge,Bulldog,Guardian,Marshal,Operator,Ares,Odin" | split: "," -%}
-        {%- assign gun_types = "pistol,pistol,pistol,pistol,smg,smg,shotgun,shotgun,rifle,rifle,sniper,sniper,lmg,lmg" | split: "," -%}
+        {%- assign guns = "Shorty,Frenzy,Ghost,Sheriff,Stinger,Spectre,Bucky,Judge,Bulldog,Guardian,Marshal,Ares,Odin" | split: "," -%}
+        {%- assign gun_types = "pistol,pistol,pistol,pistol,smg,smg,shotgun,shotgun,rifle,rifle,sniper,lmg,lmg" | split: "," -%}
         {%- for gun in guns -%}
           {%- assign slug = gun | downcase | replace: ' ', '-' -%}
           <a href="/collections/{{ slug }}" class="wc-item wc-item--{{ gun_types[forloop.index0] }}">
