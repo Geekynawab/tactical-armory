@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <!-- Horizontal line (left gap) -->
+  <line x1="2" y1="16" x2="12" y2="16" stroke="#00FFC2" stroke-width="1.5"/>
+  <!-- Horizontal line (right gap) -->
+  <line x1="20" y1="16" x2="30" y2="16" stroke="#00FFC2" stroke-width="1.5"/>
+  <!-- Vertical line (top gap) -->
+  <line x1="16" y1="2" x2="16" y2="12" stroke="#00FFC2" stroke-width="1.5"/>
+  <!-- Vertical line (bottom gap) -->
+  <line x1="16" y1="20" x2="16" y2="30" stroke="#00FFC2" stroke-width="1.5"/>
+  <!-- Center dot -->
+  <circle cx="16" cy="16" r="1.5" fill="#00FFC2"/>
+</svg>
