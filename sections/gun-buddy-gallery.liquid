@@ -1,0 +1,151 @@
+{%- liquid
+  assign collection = collections[section.settings.collection]
+  assign product_limit = section.settings.products_to_show | default: 12
+-%}
+
+<section class="section gun-buddy-gallery" id="gun-buddy-{{ section.id }}">
+  <div class="container">
+
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="section-subtitle">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    <h2 class="section-title">{{ section.settings.heading | default: 'Gun Buddies' }}</h2>
+    <span class="section-divider"></span>
+
+    <!-- Filter tabs -->
+    <div class="gb-filters" role="tablist">
+      <button class="gb-filter gb-filter--active" data-filter="all" role="tab" aria-selected="true">ALL</button>
+      <button class="gb-filter" data-filter="weapon" role="tab" aria-selected="false">WEAPON</button>
+      <button class="gb-filter" data-filter="agent" role="tab" aria-selected="false">AGENT</button>
+      <button class="gb-filter" data-filter="knife" role="tab" aria-selected="false">KNIFE</button>
+    </div>
+
+    <!-- Masonry grid -->
+    <div class="gb-grid" data-gb-grid>
+      {%- if collection != blank -%}
+        {%- for product in collection.products limit: product_limit -%}
+          {%- assign filter_tag = 'all' -%}
+          {%- if product.tags contains 'weapon' -%}{%- assign filter_tag = 'weapon' -%}
+          {%- elsif product.tags contains 'agent' -%}{%- assign filter_tag = 'agent' -%}
+          {%- elsif product.tags contains 'knife' -%}{%- assign filter_tag = 'knife' -%}
+          {%- endif -%}
+          <a href="{{ product.url }}" class="gb-card" data-category="{{ filter_tag }}" aria-label="{{ product.title | escape }}">
+            {%- if product.featured_image != blank -%}
+              <img
+                src="{{ product.featured_image | image_url: width: 300 }}"
+                alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                loading="lazy"
+                width="300"
+                height="300">
+            {%- else -%}
+              {{ 'product-1' | placeholder_svg_tag }}
+            {%- endif -%}
+            <div class="gb-card__overlay">
+              <p class="gb-card__name">{{ product.title | truncate: 22 }}</p>
+              <p class="gb-card__price">{% render 'price', product: product %}</p>
+            </div>
+          </a>
+        {%- else -%}
+          {%- for i in (1..8) -%}
+            <div class="gb-card" data-category="all">
+              {{ 'product-' | append: forloop.index | placeholder_svg_tag }}
+              <div class="gb-card__overlay">
+                <p class="gb-card__name">Buddy {{ forloop.index }}</p>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..8) -%}
+          <div class="gb-card" data-category="all">
+            {{ 'product-' | append: forloop.index | placeholder_svg_tag }}
+            <div class="gb-card__overlay">
+              <p class="gb-card__name">Buddy {{ forloop.index }}</p>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_view_all and collection != blank -%}
+      <div style="text-align:center;margin-top:2rem;">
+        <a href="{{ collection.url }}" class="btn btn--outline">View All Buddies</a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+<script>
+(function () {
+  var section = document.getElementById('gun-buddy-{{ section.id }}');
+  if (!section) return;
+
+  // Filter tabs
+  var filters = section.querySelectorAll('.gb-filter');
+  var cards   = section.querySelectorAll('.gb-card');
+
+  filters.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      filters.forEach(function (f) { f.classList.remove('gb-filter--active'); f.setAttribute('aria-selected', 'false'); });
+      btn.classList.add('gb-filter--active');
+      btn.setAttribute('aria-selected', 'true');
+      var cat = btn.dataset.filter;
+      cards.forEach(function (card) {
+        var show = cat === 'all' || card.dataset.category === cat;
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+}());
+</script>
+
+{% schema %}
+{
+  "name": "Gun-Buddy Gallery",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Keychain Collection"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "GUN BUDDIES"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection (keychains)"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "default": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View All' button",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gun-Buddy Gallery",
+      "settings": {
+        "eyebrow": "Keychain Collection",
+        "heading": "GUN BUDDIES"
+      }
+    }
+  ]
+}
+{% endschema %}
