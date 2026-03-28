@@ -2963,6 +2963,128 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 }
 
 /* --------------------------------------------------------------------------
+   CIRCULAR GALLERY — Featured knife carousel
+   -------------------------------------------------------------------------- */
+.circular-gallery { overflow: hidden; }
+.circular-gallery .section-title { margin-bottom: 0.25rem; }
+
+.cg-stage {
+  position: relative;
+  margin-top: 2.5rem;
+  overflow: hidden;
+}
+
+.cg-track {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.cg-slide {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: scale(0.96) translateX(30px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  pointer-events: none;
+}
+.cg-slide--active {
+  opacity: 1;
+  transform: scale(1) translateX(0);
+  pointer-events: auto;
+}
+
+.cg-slide__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  min-height: 420px;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--transition-normal);
+}
+.cg-slide__inner:hover { border-color: var(--color-accent); }
+
+.cg-slide__inner img,
+.cg-slide__inner svg {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+}
+
+.cg-slide__hud {
+  padding: 2rem 2rem 2rem 0;
+}
+.cg-slide__type {
+  font-family: var(--font-subhead);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent-teal);
+  margin-bottom: 0.75rem;
+}
+.cg-slide__title {
+  font-family: var(--font-headline);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+.cg-slide__price {
+  font-family: var(--font-subhead);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.cg-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  background: rgba(15,25,35,0.9);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+}
+.cg-btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+.cg-btn--prev { left: 0.75rem; }
+.cg-btn--next { right: 0.75rem; }
+
+.cg-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+.cg-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-border);
+  border: none;
+  transition: background var(--transition-fast), width var(--transition-fast);
+}
+.cg-dot--active { background: var(--color-accent); width: 20px; }
+
+.cg-footer { text-align: center; margin-top: 2rem; }
+
+@media (max-width: 768px) {
+  .cg-slide__inner { grid-template-columns: 1fr; min-height: auto; }
+  .cg-slide__inner img, .cg-slide__inner svg { height: 260px; }
+  .cg-slide__hud { padding: 1.25rem; }
+}
+
+/* --------------------------------------------------------------------------
    TOAST NOTIFICATIONS — Valorant elimination-feed style
    -------------------------------------------------------------------------- */
 @keyframes toast-in {

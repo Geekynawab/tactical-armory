@@ -1,0 +1,166 @@
+{%- liquid
+  assign collection = collections[section.settings.collection]
+  assign product_limit = 8
+-%}
+
+<section class="section circular-gallery" id="circular-gallery-{{ section.id }}">
+  <div class="container">
+
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="section-subtitle">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    <h2 class="section-title">{{ section.settings.heading | default: 'Featured Bundle' }}</h2>
+    <span class="section-divider"></span>
+
+    <div class="cg-stage">
+
+      <!-- Track — slides horizontally via JS/CSS -->
+      <div class="cg-track" data-cg-track>
+        {%- if collection != blank -%}
+          {%- for product in collection.products limit: product_limit -%}
+            <div class="cg-slide {% if forloop.first %}cg-slide--active{% endif %}" data-index="{{ forloop.index0 }}">
+              <a href="{{ product.url }}" class="cg-slide__inner">
+                {%- if product.featured_image != blank -%}
+                  <img
+                    src="{{ product.featured_image | image_url: width: 500 }}"
+                    alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                    loading="lazy"
+                    width="500"
+                    height="500">
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag }}
+                {%- endif -%}
+                <div class="cg-slide__hud">
+                  <p class="cg-slide__type">{{ product.type | default: 'Weapon Skin' }}</p>
+                  <h3 class="cg-slide__title">{{ product.title }}</h3>
+                  <p class="cg-slide__price">{% render 'price', product: product %}</p>
+                </div>
+              </a>
+            </div>
+          {%- else -%}
+            {%- for i in (1..4) -%}
+              <div class="cg-slide {% if forloop.first %}cg-slide--active{% endif %}" data-index="{{ forloop.index0 }}">
+                <div class="cg-slide__inner">
+                  {{ 'product-' | append: forloop.index | placeholder_svg_tag }}
+                  <div class="cg-slide__hud">
+                    <p class="cg-slide__type">Weapon Skin</p>
+                    <h3 class="cg-slide__title">Sample Knife {{ forloop.index }}</h3>
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endfor -%}
+        {%- else -%}
+          {%- for i in (1..4) -%}
+            <div class="cg-slide {% if forloop.first %}cg-slide--active{% endif %}" data-index="{{ forloop.index0 }}">
+              <div class="cg-slide__inner">
+                {{ 'product-' | append: forloop.index | placeholder_svg_tag }}
+                <div class="cg-slide__hud">
+                  <p class="cg-slide__type">Weapon Skin</p>
+                  <h3 class="cg-slide__title">Sample Knife {{ forloop.index }}</h3>
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+
+      <!-- Controls -->
+      <button class="cg-btn cg-btn--prev" data-cg-prev aria-label="Previous">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="cg-btn cg-btn--next" data-cg-next aria-label="Next">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
+      <!-- Dots -->
+      <div class="cg-dots" data-cg-dots></div>
+
+    </div><!-- /.cg-stage -->
+
+    {%- if section.settings.show_view_all and collection != blank -%}
+      <div class="cg-footer">
+        <a href="{{ collection.url }}" class="btn btn--outline">View All Knives</a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+<script>
+(function () {
+  var stage   = document.querySelector('#circular-gallery-{{ section.id }}');
+  if (!stage) return;
+  var track   = stage.querySelector('[data-cg-track]');
+  var slides  = Array.from(track.querySelectorAll('.cg-slide'));
+  var dotsEl  = stage.querySelector('[data-cg-dots]');
+  var current = 0;
+  var total   = slides.length;
+  var timer;
+
+  // Build dots
+  slides.forEach(function (_, i) {
+    var dot = document.createElement('button');
+    dot.className = 'cg-dot' + (i === 0 ? ' cg-dot--active' : '');
+    dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+    dot.addEventListener('click', function () { goTo(i); });
+    dotsEl.appendChild(dot);
+  });
+
+  function goTo(index) {
+    slides[current].classList.remove('cg-slide--active');
+    dotsEl.children[current].classList.remove('cg-dot--active');
+    current = (index + total) % total;
+    slides[current].classList.add('cg-slide--active');
+    dotsEl.children[current].classList.add('cg-dot--active');
+  }
+
+  stage.querySelector('[data-cg-prev]').addEventListener('click', function () { goTo(current - 1); resetTimer(); });
+  stage.querySelector('[data-cg-next]').addEventListener('click', function () { goTo(current + 1); resetTimer(); });
+
+  function resetTimer() { clearInterval(timer); startTimer(); }
+  function startTimer() { timer = setInterval(function () { goTo(current + 1); }, 4000); }
+  startTimer();
+}());
+</script>
+
+{% schema %}
+{
+  "name": "Circular Gallery",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Featured Bundle"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "KNIFE VAULT"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection to feature"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View All' button",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Circular Gallery",
+      "settings": {
+        "eyebrow": "Featured Bundle",
+        "heading": "KNIFE VAULT"
+      }
+    }
+  ]
+}
+{% endschema %}
