@@ -10,7 +10,7 @@ Track progress of all visual/UX upgrades on top of the cloned base theme.
 - [x] **2. Scanline overlay** — CRT horizontal line texture on hero and featured sections
 - [x] **3. Grain/noise texture** — Subtle SVG noise overlay on page background (HUD screen feel)
 - [x] **4. Crosshair cursor** — Valorant-style crosshair SVG as custom CSS cursor
-- [ ] **5. Glitch text effect** — CSS-only RGB-split distortion on H1/H2 headings
+- [x] **5. Glitch text effect** — CSS-only RGB-split distortion on H1/H2 headings
 - [ ] **6. Product card hover** — Scale + border glow + metallic glare sweep + HUD stats overlay slide-in
 - [ ] **7. Button press animation** — Scale press-down (0.97) on click for all CTAs
 - [ ] **8. Toast notifications** — Elimination-feed style (dark pill, red left border, slides from top-right)

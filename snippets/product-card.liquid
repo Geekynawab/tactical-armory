@@ -64,6 +64,24 @@
           </button>
         </div>
       {%- endif -%}
+
+      <!-- HUD stat overlay -->
+      <div class="product-card__hud" aria-hidden="true">
+        <div class="product-card__hud-chips">
+          {%- if product.type != blank -%}
+            <span class="hud-chip">{{ product.type }}</span>
+          {%- endif -%}
+          {%- if product.available -%}
+            <span class="hud-chip">IN STOCK</span>
+          {%- else -%}
+            <span class="hud-chip" style="color:var(--color-accent);border-color:rgba(255,70,85,0.3)">SOLD OUT</span>
+          {%- endif -%}
+          {%- if product.variants.size > 1 -%}
+            <span class="hud-chip">{{ product.variants.size }} VARIANTS</span>
+          {%- endif -%}
+        </div>
+        <p class="product-card__hud-name">{{ product.title | upcase | truncate: 30 }}</p>
+      </div>
     </a>
 
     <div class="product-card__info">

@@ -1030,6 +1030,19 @@
         chatBtn.style.pointerEvents = nearBottom ? 'auto' : 'none';
       }, { passive: true });
     }());
+
+    // Product card spotlight — track cursor position as CSS variables
+    (function () {
+      $$('.product-card').forEach(function (card) {
+        card.addEventListener('mousemove', function (e) {
+          var rect = card.getBoundingClientRect();
+          var x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1) + '%';
+          var y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1) + '%';
+          card.style.setProperty('--spotlight-x', x);
+          card.style.setProperty('--spotlight-y', y);
+        }, { passive: true });
+      });
+    }());
   });
 
 })();

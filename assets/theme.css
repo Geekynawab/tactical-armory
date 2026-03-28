@@ -1483,8 +1483,8 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 }
 .product-card:hover {
   border-color: var(--color-accent);
-  box-shadow: var(--shadow-glow);
-  transform: translateY(-4px);
+  box-shadow: 0 0 0 1px var(--color-accent), 0 0 24px rgba(255,70,85,0.35), 0 8px 32px rgba(0,0,0,0.5);
+  transform: translateY(-6px) scale(1.02);
 }
 
 .product-card__media {
@@ -1500,7 +1500,89 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   transition: transform var(--transition-slow);
 }
 .product-card:hover .product-card__media img {
-  transform: scale(1.06);
+  transform: scale(1.08);
+}
+
+/* Glare sweep — metallic specular light on hover */
+.product-card__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255,255,255,0.08) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  background-position: -100% 0;
+  transition: background-position 0.55s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+.product-card:hover .product-card__media::after {
+  background-position: 200% 0;
+}
+
+/* Spotlight — radial cursor glow tracked via CSS variable */
+.product-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle 120px at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+    rgba(0,255,194,0.08) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  z-index: 1;
+}
+.product-card:hover::before {
+  opacity: 1;
+}
+
+/* HUD stat overlay — slides up from bottom on hover */
+.product-card__hud {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(transparent, rgba(15,25,35,0.95));
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 4;
+  border-top: 1px solid rgba(255,70,85,0.3);
+}
+.product-card:hover .product-card__hud {
+  transform: translateY(0);
+}
+.product-card__hud-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+}
+.hud-chip {
+  font-family: var(--font-subhead);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent-teal);
+  border: 1px solid rgba(0,255,194,0.3);
+  padding: 0.15rem 0.4rem;
+  background: rgba(0,255,194,0.05);
+}
+.product-card__hud-name {
+  font-family: var(--font-subhead);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
 }
 
 .product-card__badges {
