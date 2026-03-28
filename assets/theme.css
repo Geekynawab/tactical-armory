@@ -2972,6 +2972,91 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 }
 
 /* --------------------------------------------------------------------------
+   INSPECT LIGHTBOX — Full-screen product image viewer
+   -------------------------------------------------------------------------- */
+.product-gallery__inspect-btn {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-subhead);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-accent-teal);
+  background: rgba(15,25,35,0.85);
+  border: 1px solid rgba(0,255,194,0.35);
+  padding: 0.4rem 0.75rem;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+  z-index: 5;
+  backdrop-filter: blur(4px);
+}
+.product-gallery__inspect-btn:hover {
+  background: rgba(0,255,194,0.1);
+  border-color: var(--color-accent-teal);
+}
+
+.inspect-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.inspect-lightbox[hidden] { display: none; }
+
+.inspect-lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 16, 22, 0.96);
+  backdrop-filter: blur(6px);
+}
+
+.inspect-lightbox__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.inspect-lightbox__img {
+  max-width: 80vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 0 60px rgba(0,0,0,0.7), 0 0 0 1px var(--color-accent);
+}
+
+.inspect-lightbox__label {
+  font-family: var(--font-subhead);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+}
+
+.inspect-lightbox__close {
+  position: absolute;
+  top: -2.5rem;
+  right: 0;
+  color: var(--color-text-secondary);
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  transition: color var(--transition-fast);
+}
+.inspect-lightbox__close:hover { color: var(--color-accent); }
+
+/* --------------------------------------------------------------------------
    GUN-BUDDY GALLERY — Masonry keychain grid
    -------------------------------------------------------------------------- */
 .gb-filters {

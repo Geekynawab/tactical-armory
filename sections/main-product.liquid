@@ -60,7 +60,12 @@
                 alt="{{ product.featured_image.alt | default: product.title | escape }}"
                 loading="eager"
                 width="900"
-                height="900">
+                height="900"
+                data-inspect-src="{{ product.featured_image | image_url: width: 1600 }}">
+              <button class="product-gallery__inspect-btn" data-open-inspect aria-label="Inspect full screen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                INSPECT
+              </button>
             {%- else -%}
               {{ 'product-1' | placeholder_svg_tag: 'product-gallery__placeholder' }}
             {%- endif -%}
@@ -313,6 +318,47 @@
     price: {{ product.price }},
     image: {{ product.featured_image | image_url: width: 400 | json }}
   };
+</script>
+
+<!-- Inspect Lightbox -->
+<div class="inspect-lightbox" id="inspect-lightbox" role="dialog" aria-modal="true" aria-label="Product inspect view" hidden>
+  <div class="inspect-lightbox__backdrop" data-close-inspect></div>
+  <div class="inspect-lightbox__inner">
+    <button class="inspect-lightbox__close" data-close-inspect aria-label="Close inspect">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <img class="inspect-lightbox__img" src="" alt="{{ product.title | escape }}" id="inspect-img">
+    <p class="inspect-lightbox__label">{{ product.title | upcase }}</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var lightbox  = document.getElementById('inspect-lightbox');
+  var lbImg     = document.getElementById('inspect-img');
+  var openBtn   = document.querySelector('[data-open-inspect]');
+  var mainImg   = document.getElementById('gallery-main-img');
+  if (!lightbox || !openBtn) return;
+
+  function open() {
+    var src = mainImg ? (mainImg.dataset.inspectSrc || mainImg.src) : '';
+    lbImg.src = src;
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    lightbox.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  openBtn.addEventListener('click', open);
+  lightbox.querySelectorAll('[data-close-inspect]').forEach(function (el) {
+    el.addEventListener('click', close);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !lightbox.hidden) close();
+  });
+}());
 </script>
 
 {% schema %}
