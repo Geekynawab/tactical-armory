@@ -46,16 +46,16 @@
    1. CSS Custom Properties
    -------------------------------------------------------------------------- */
 :root {
-  --color-bg-primary:     #0A0A0A;
-  --color-bg-secondary:   #141414;
-  --color-bg-card:        #1A1A1A;
-  --color-accent:         #FF4655;
-  --color-accent-hover:   #BD3944;
+  --color-bg-primary:     #111823;
+  --color-bg-secondary:   #171f2e;
+  --color-bg-card:        #1d2638;
+  --color-accent:         #ff4654;
+  --color-accent-hover:   #ba3a46;
   --color-accent-teal:    #00FFC2;
-  --color-text-primary:   #ECE8E1;
-  --color-text-secondary: #8B978F;
-  --color-text-muted:     #5B6B65;
-  --color-border:         #2A2A2A;
+  --color-text-primary:   #ffffff;
+  --color-text-secondary: #9aa5b4;
+  --color-text-muted:     #5a6a7a;
+  --color-border:         #243040;
   --color-success:        #00C48C;
   --color-warning:        #FFB800;
 
@@ -1016,9 +1016,9 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   z-index: 1;
   background: linear-gradient(
     105deg,
-    rgba(10,10,10,0.88) 0%,
-    rgba(10,10,10,0.60) 55%,
-    rgba(10,10,10,0.30) 100%
+    rgba(17,24,35,0.88) 0%,
+    rgba(17,24,35,0.60) 55%,
+    rgba(17,24,35,0.30) 100%
   );
 }
 
@@ -1095,7 +1095,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   position: fixed;
   inset: 0;
   z-index: 500;
-  background: rgba(10,10,10,0.97);
+  background: rgba(17,24,35,0.97);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1179,7 +1179,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: rgba(10,10,10,0.7);
+  background: rgba(17,24,35,0.7);
   border: none;
   cursor: pointer;
   display: flex;
@@ -1188,7 +1188,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   color: var(--color-text-muted);
   transition: color var(--transition-fast), background var(--transition-fast);
 }
-.product-card__wishlist:hover { color: var(--color-accent); background: rgba(10,10,10,0.9); }
+.product-card__wishlist:hover { color: var(--color-accent); background: rgba(17,24,35,0.9); }
 .product-card__wishlist.active { color: var(--color-accent); }
 .product-card__wishlist.active svg { fill: var(--color-accent); }
 
@@ -1553,7 +1553,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   left: 0;
   right: 0;
   padding: 0.75rem 1rem;
-  background: linear-gradient(transparent, rgba(10,10,10,0.95));
+  background: linear-gradient(transparent, rgba(17,24,35,0.95));
   transform: translateY(100%);
   transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   z-index: 4;
@@ -1627,7 +1627,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   left: 0;
   right: 0;
   padding: 0.75rem;
-  background: linear-gradient(transparent, rgba(10,10,10,0.9));
+  background: linear-gradient(transparent, rgba(17,24,35,0.9));
   transform: translateY(100%);
   transition: transform var(--transition-normal);
   z-index: 2;
@@ -2387,7 +2387,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: rgba(10,10,10,0.75);
+  background: rgba(17,24,35,0.75);
   border: 1px solid var(--color-border);
   color: var(--color-text-primary);
   display: flex;
@@ -2986,7 +2986,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   font-weight: 700;
   letter-spacing: 0.12em;
   color: var(--color-accent-teal);
-  background: rgba(10,10,10,0.85);
+  background: rgba(17,24,35,0.85);
   border: 1px solid rgba(0,255,194,0.35);
   padding: 0.4rem 0.75rem;
   clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
@@ -3116,7 +3116,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   left: 0;
   right: 0;
   padding: 0.6rem 0.75rem;
-  background: linear-gradient(transparent, rgba(10,10,10,0.95));
+  background: linear-gradient(transparent, rgba(17,24,35,0.95));
   transform: translateY(100%);
   transition: transform 0.3s ease;
 }
@@ -3225,7 +3225,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   transform: translateY(-50%);
   width: 44px;
   height: 44px;
-  background: rgba(10,10,10,0.9);
+  background: rgba(17,24,35,0.9);
   border: 1px solid var(--color-border);
   color: var(--color-text-primary);
   display: flex;
