@@ -9,8 +9,8 @@
       </div>
       <!-- Featured row: Phantom, Vandal, Classic -->
       <div class="wc-group__grid wc-group__grid--featured">
-        {%- assign featured_guns = "Vandal,Phantom,Guardian" | split: "," -%}
-        {%- assign featured_types = "rifle,rifle,rifle" | split: "," -%}
+        {%- assign featured_guns = "Vandal,Phantom,Sheriff" | split: "," -%}
+        {%- assign featured_types = "rifle,rifle,pistol" | split: "," -%}
         {%- for gun in featured_guns -%}
           {%- assign slug = gun | downcase | replace: ' ', '-' -%}
           <a href="/collections/{{ slug }}" class="wc-item wc-item--featured wc-item--{{ featured_types[forloop.index0] }}">
@@ -30,8 +30,8 @@
 
       <!-- Rest of guns -->
       <div class="wc-group__grid">
-        {%- assign guns = "Classic,Sheriff,Spectre" | split: "," -%}
-        {%- assign gun_types = "pistol,pistol,smg" | split: "," -%}
+        {%- assign guns = "Classic,Spectre,Guardian" | split: "," -%}
+        {%- assign gun_types = "pistol,smg,rifle" | split: "," -%}
         {%- for gun in guns -%}
           {%- assign slug = gun | downcase | replace: ' ', '-' -%}
           <a href="/collections/{{ slug }}" class="wc-item wc-item--{{ gun_types[forloop.index0] }}">
