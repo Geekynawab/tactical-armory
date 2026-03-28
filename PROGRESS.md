@@ -6,7 +6,7 @@ Track progress of all visual/UX upgrades on top of the cloned base theme.
 
 ## Upgrades
 
-- [ ] **1. Fonts** — Replace DM Sans with Bebas Neue (H1/hero) + Oswald (nav/labels/secondary)
+- [x] **1. Fonts** — Replace DM Sans with Bebas Neue (H1/hero) + Oswald (nav/labels/secondary)
 - [ ] **2. Scanline overlay** — CRT horizontal line texture on hero and featured sections
 - [ ] **3. Grain/noise texture** — Subtle SVG noise overlay on page background (HUD screen feel)
 - [ ] **4. Crosshair cursor** — Valorant-style crosshair SVG as custom CSS cursor
