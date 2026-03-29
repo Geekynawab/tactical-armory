@@ -3336,8 +3336,9 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 /* --------------------------------------------------------------------------
    WEAPON CATEGORIES — Guns + Melee icon rows
    -------------------------------------------------------------------------- */
-.weapon-categories { padding-top: 0.75rem; padding-bottom: 0.25rem; }
+.weapon-categories { padding-top: 0.75rem; padding-bottom: 0; }
 .weapon-categories .wc-group { margin-bottom: 1rem; }
+.weapon-categories .wc-group:last-child { margin-bottom: 0; }
 
 .wc-group { margin-bottom: 1.25rem; }
 
@@ -3373,13 +3374,13 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 
 /* Guns — single row, slightly wider cards */
 .wc-group__grid--guns .wc-item {
-  flex: 0 0 110px;
+  flex: 0 0 130px;
 }
 
 .wc-item {
   position: relative;
   overflow: hidden;
-  height: 65px;
+  height: 85px;
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   text-decoration: none;
@@ -3416,7 +3417,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 
 /* Per-weapon icon padding — normalise apparent size to match Phantom */
 .wc-item--sheriff .wc-item__icon  { padding: 18px; }
-.wc-item--classic .wc-item__icon  { padding: 14px; }
+.wc-item--classic .wc-item__icon  { padding: 20px; }
 .wc-item--spectre .wc-item__icon  { padding: 10px; }
 .wc-item--vandal  .wc-item__icon  { padding: 6px; }
 .wc-item--guardian .wc-item__icon { padding: 2px; }
