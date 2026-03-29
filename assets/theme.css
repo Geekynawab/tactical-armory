@@ -953,10 +953,16 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 /* --------------------------------------------------------------------------
    8. Hero Banner
    -------------------------------------------------------------------------- */
+/* Hero slides up behind the transparent header */
+.section-hero {
+  margin-top: -64px;
+}
+
 .hero-banner {
   position: relative;
   min-height: 48vh;
   max-height: 560px;
+  padding-top: 64px;
   display: flex;
   align-items: center;
   overflow: hidden;
