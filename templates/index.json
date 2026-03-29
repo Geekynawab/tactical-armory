@@ -127,7 +127,6 @@
   "order": [
     "hero-banner",
     "weapon-categories",
-    "trust-bar",
     "collection-categories",
     "flash-sales",
     "collections-showcase",
@@ -137,6 +136,7 @@
     "testimonials",
     "journal",
     "faq",
+    "trust-bar",
     "newsletter"
   ]
 }

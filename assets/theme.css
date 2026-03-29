@@ -961,8 +961,8 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 
 .hero-banner {
   position: relative;
-  min-height: 48vh;
-  max-height: 560px;
+  min-height: 32vh;
+  max-height: 400px;
   padding-top: 64px;
   display: flex;
   align-items: center;
@@ -985,7 +985,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   top: 0;
   left: 0;
   right: 0;
-  bottom: -370px;
+  bottom: -420px;
   z-index: 0;
 }
 .hero-banner__slide {
