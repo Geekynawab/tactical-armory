@@ -3394,7 +3394,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   overflow: hidden;
   height: 85px;
   background: var(--color-accent);
-  border: 1px solid rgba(255,255,255,0.7);
+  border: 2px solid #ffffff;
   text-decoration: none;
   color: #ffffff;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
@@ -3409,7 +3409,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 
 .wc-item__icon {
   position: absolute;
-  inset: 0 0 20px 0;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3434,23 +3434,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 .wc-item--vandal  .wc-item__icon  { padding: 6px; }
 .wc-item--guardian .wc-item__icon { padding: 2px; }
 
-.wc-item__name {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  font-family: var(--font-subhead);
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 0.25rem 0.25rem;
-  color: #ffffff;
-  background: rgba(0,0,0,0.35);
-  opacity: 1;
-  transform: none;
-}
+.wc-item__name { display: none; }
 
 .wc-item__type { display: none; }
 
