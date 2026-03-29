@@ -1007,18 +1007,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 }
 
 .hero-banner__overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: -750px;
-  z-index: 1;
-  background: linear-gradient(
-    105deg,
-    rgba(17,17,17,0.88) 0%,
-    rgba(17,17,17,0.60) 55%,
-    rgba(17,17,17,0.30) 100%
-  );
+  display: none;
 }
 
 .hero-banner__content {
