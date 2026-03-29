@@ -985,7 +985,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   top: 0;
   left: 0;
   right: 0;
-  bottom: -750px;
+  bottom: -370px;
   z-index: 0;
 }
 .hero-banner__slide {
@@ -3372,8 +3372,10 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 }
 
 @keyframes wc-pop {
-  from { opacity: 0; transform: translateY(22px) scale(0.94); }
-  to   { opacity: 1; transform: translateY(0)   scale(1); }
+  0%   { opacity: 0; transform: translateY(40px) scale(0.88); filter: brightness(0.4); }
+  60%  { opacity: 1; transform: translateY(-6px) scale(1.04); filter: brightness(1.3); }
+  80%  { transform: translateY(2px) scale(0.99); filter: brightness(1); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: brightness(1); }
 }
 
 .wc-item {
@@ -3381,7 +3383,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   overflow: hidden;
   height: 85px;
   background: var(--color-accent);
-  animation: wc-pop 0.4s ease both;
+  animation: wc-pop 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
   border: 2px solid #ffffff;
   text-decoration: none;
   color: #ffffff;
@@ -3427,12 +3429,12 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 .wc-item__type { display: none; }
 
 /* Staggered pop-in delays */
-.wc-group__grid .wc-item:nth-child(1) { animation-delay: 0.05s; }
-.wc-group__grid .wc-item:nth-child(2) { animation-delay: 0.12s; }
-.wc-group__grid .wc-item:nth-child(3) { animation-delay: 0.19s; }
-.wc-group__grid .wc-item:nth-child(4) { animation-delay: 0.26s; }
-.wc-group__grid .wc-item:nth-child(5) { animation-delay: 0.33s; }
-.wc-group__grid .wc-item:nth-child(6) { animation-delay: 0.40s; }
+.wc-group__grid .wc-item:nth-child(1) { animation-delay: 0.10s; }
+.wc-group__grid .wc-item:nth-child(2) { animation-delay: 0.22s; }
+.wc-group__grid .wc-item:nth-child(3) { animation-delay: 0.34s; }
+.wc-group__grid .wc-item:nth-child(4) { animation-delay: 0.46s; }
+.wc-group__grid .wc-item:nth-child(5) { animation-delay: 0.58s; }
+.wc-group__grid .wc-item:nth-child(6) { animation-delay: 0.70s; }
 
 @media (max-width: 600px) {
   .wc-group__grid { grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 0.4rem; }
