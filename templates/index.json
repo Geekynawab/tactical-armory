@@ -127,8 +127,8 @@
   "order": [
     "hero-banner",
     "weapon-categories",
-    "collection-categories",
     "trust-bar",
+    "collection-categories",
     "flash-sales",
     "collections-showcase",
     "bestsellers",
