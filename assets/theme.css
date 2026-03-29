@@ -3393,28 +3393,28 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   position: relative;
   overflow: hidden;
   height: 85px;
-  background: var(--color-bg-card);
-  border: 1px solid rgba(255,255,255,0.18);
+  background: var(--color-accent);
+  border: 1px solid rgba(255,255,255,0.7);
   text-decoration: none;
-  color: var(--color-text-secondary);
-  transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+  color: #ffffff;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
   clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
 }
 .wc-item:hover {
-  border-color: var(--color-accent);
-  color: var(--color-text-primary);
-  background: var(--color-bg-secondary);
+  border-color: #ffffff;
+  background: var(--color-accent-hover);
+  box-shadow: 0 6px 24px rgba(255,70,85,0.5);
   transform: translateY(-3px);
 }
 
 .wc-item__icon {
   position: absolute;
-  inset: 0;
+  inset: 0 0 20px 0;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 8px;
-  color: var(--color-text-muted);
+  color: #ffffff;
   transition: color var(--transition-fast);
 }
 .wc-item__icon svg,
@@ -3423,9 +3423,9 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   height: 100%;
   object-fit: contain;
 }
-.wc-item:hover .wc-item__icon { color: var(--color-text-primary); }
-.wc-item--melee .wc-item__icon { color: var(--color-text-muted); }
-.wc-item:hover.wc-item--melee .wc-item__icon { color: var(--color-accent-teal); }
+.wc-item:hover .wc-item__icon { color: #ffffff; }
+.wc-item--melee .wc-item__icon { color: #ffffff; }
+.wc-item:hover.wc-item--melee .wc-item__icon { color: #ffffff; }
 
 /* Per-weapon icon padding — normalise apparent size to match Phantom */
 .wc-item--sheriff .wc-item__icon  { padding: 18px; }
@@ -3441,19 +3441,15 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   right: 0;
   font-family: var(--font-subhead);
   font-size: 0.6rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-align: center;
-  padding: 0.3rem 0.25rem;
-  background: rgba(17,17,17,0.85);
-  opacity: 0;
-  transform: translateY(4px);
-  transition: opacity var(--transition-fast), transform var(--transition-fast);
-}
-.wc-item:hover .wc-item__name {
+  padding: 0.25rem 0.25rem;
+  color: #ffffff;
+  background: rgba(0,0,0,0.35);
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 .wc-item__type { display: none; }
