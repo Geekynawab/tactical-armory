@@ -46,11 +46,11 @@
    1. CSS Custom Properties
    -------------------------------------------------------------------------- */
 :root {
-  --color-bg-primary:     #111823;
-  --color-bg-secondary:   #171f2e;
-  --color-bg-card:        #1d2638;
-  --color-accent:         #ef4444;
-  --color-accent-hover:   #ba3a46;
+  --color-bg-primary:     #111111;
+  --color-bg-secondary:   #1a1a1a;
+  --color-bg-card:        #222222;
+  --color-accent:         #FF4655;
+  --color-accent-hover:   #cc3644;
   --color-accent-teal:    #00FFC2;
   --color-text-primary:   #ffffff;
   --color-text-secondary: #9aa5b4;
@@ -348,7 +348,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 }
 .site-header.is-scrolled,
 .site-header:hover {
-  background: rgba(17,24,35,0.88);
+  background: rgba(17,17,17,0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -1007,9 +1007,9 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   z-index: 1;
   background: linear-gradient(
     105deg,
-    rgba(17,24,35,0.88) 0%,
-    rgba(17,24,35,0.60) 55%,
-    rgba(17,24,35,0.30) 100%
+    rgba(17,17,17,0.88) 0%,
+    rgba(17,17,17,0.60) 55%,
+    rgba(17,17,17,0.30) 100%
   );
 }
 
@@ -1086,7 +1086,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   position: fixed;
   inset: 0;
   z-index: 500;
-  background: rgba(17,24,35,0.97);
+  background: rgba(17,17,17,0.97);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1170,7 +1170,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: rgba(17,24,35,0.7);
+  background: rgba(17,17,17,0.7);
   border: none;
   cursor: pointer;
   display: flex;
@@ -1179,7 +1179,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   color: var(--color-text-muted);
   transition: color var(--transition-fast), background var(--transition-fast);
 }
-.product-card__wishlist:hover { color: var(--color-accent); background: rgba(17,24,35,0.9); }
+.product-card__wishlist:hover { color: var(--color-accent); background: rgba(17,17,17,0.9); }
 .product-card__wishlist.active { color: var(--color-accent); }
 .product-card__wishlist.active svg { fill: var(--color-accent); }
 
@@ -1551,7 +1551,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   left: 0;
   right: 0;
   padding: 0.75rem 1rem;
-  background: linear-gradient(transparent, rgba(17,24,35,0.95));
+  background: linear-gradient(transparent, rgba(17,17,17,0.95));
   transform: translateY(100%);
   transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   z-index: 4;
@@ -1625,7 +1625,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   left: 0;
   right: 0;
   padding: 0.75rem;
-  background: linear-gradient(transparent, rgba(17,24,35,0.9));
+  background: linear-gradient(transparent, rgba(17,17,17,0.9));
   transform: translateY(100%);
   transition: transform var(--transition-normal);
   z-index: 2;
@@ -2385,7 +2385,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: rgba(17,24,35,0.75);
+  background: rgba(17,17,17,0.75);
   border: 1px solid var(--color-border);
   color: var(--color-text-primary);
   display: flex;
@@ -2984,7 +2984,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   font-weight: 700;
   letter-spacing: 0.12em;
   color: var(--color-accent-teal);
-  background: rgba(17,24,35,0.85);
+  background: rgba(17,17,17,0.85);
   border: 1px solid rgba(0,255,194,0.35);
   padding: 0.4rem 0.75rem;
   clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
@@ -3114,7 +3114,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   left: 0;
   right: 0;
   padding: 0.6rem 0.75rem;
-  background: linear-gradient(transparent, rgba(17,24,35,0.95));
+  background: linear-gradient(transparent, rgba(17,17,17,0.95));
   transform: translateY(100%);
   transition: transform 0.3s ease;
 }
@@ -3223,7 +3223,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   transform: translateY(-50%);
   width: 44px;
   height: 44px;
-  background: rgba(17,24,35,0.9);
+  background: rgba(17,17,17,0.9);
   border: 1px solid var(--color-border);
   color: var(--color-text-primary);
   display: flex;
@@ -3441,7 +3441,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   text-transform: uppercase;
   text-align: center;
   padding: 0.3rem 0.25rem;
-  background: rgba(17,24,35,0.85);
+  background: rgba(17,17,17,0.85);
   opacity: 0;
   transform: translateY(4px);
   transition: opacity var(--transition-fast), transform var(--transition-fast);
