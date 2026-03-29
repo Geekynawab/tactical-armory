@@ -1117,7 +1117,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   letter-spacing: 0.04em;
   line-height: 1.05;
   margin-bottom: 1.25rem;
-  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.95), 0 4px 24px rgba(0,0,0,0.8);
 }
 .hero-banner__title em {
   font-style: normal;
@@ -1125,8 +1125,12 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 }
 
 .hero-banner__subtitle {
-  font-size: 1rem;
-  color: var(--color-text-secondary);
+  font-family: var(--font-subhead);
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.92);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.95), 0 2px 16px rgba(0,0,0,0.8);
   margin-bottom: 2rem;
   max-width: 480px;
   line-height: 1.7;
