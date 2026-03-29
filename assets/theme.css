@@ -985,7 +985,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   top: 0;
   left: 0;
   right: 0;
-  bottom: -450px;
+  bottom: -750px;
   z-index: 0;
 }
 .hero-banner__slide {
