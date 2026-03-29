@@ -985,7 +985,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   top: 0;
   left: 0;
   right: 0;
-  bottom: -600px;
+  bottom: -450px;
   z-index: 0;
 }
 .hero-banner__slide {
@@ -3348,8 +3348,10 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 /* --------------------------------------------------------------------------
    WEAPON CATEGORIES — Guns + Melee icon rows
    -------------------------------------------------------------------------- */
-.weapon-categories { padding-top: 0.75rem; padding-bottom: 2rem; background: transparent; position: relative; z-index: 1; }
-.weapon-categories::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(to bottom, transparent, var(--color-bg-primary)); pointer-events: none; z-index: 2; }
+.weapon-categories { padding-top: 0.75rem; padding-bottom: 2.5rem; background: transparent; position: relative; z-index: 1; }
+.weapon-categories::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.45); pointer-events: none; z-index: 0; }
+.weapon-categories::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 180px; background: linear-gradient(to bottom, transparent 0%, var(--color-bg-primary) 85%); pointer-events: none; z-index: 2; }
+.weapon-categories .container { position: relative; z-index: 1; }
 .weapon-categories .wc-group { margin-bottom: 1rem; }
 .weapon-categories .wc-group:last-child { margin-bottom: 0; }
 
