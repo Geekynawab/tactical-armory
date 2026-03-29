@@ -74,15 +74,6 @@
         "show_view_all": true
       }
     },
-    "gun-buddy-gallery": {
-      "type": "gun-buddy-gallery",
-      "settings": {
-        "eyebrow": "Keychain Collection",
-        "heading": "GUN BUDDIES",
-        "products_to_show": 12,
-        "show_view_all": true
-      }
-    },
     "testimonials": {
       "type": "testimonials",
       "settings": {
@@ -143,7 +134,6 @@
     "bestsellers",
     "circular-gallery",
     "latest-drop",
-    "gun-buddy-gallery",
     "testimonials",
     "journal",
     "faq",
