@@ -961,8 +961,8 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 
 .hero-banner {
   position: relative;
-  min-height: 32vh;
-  max-height: 400px;
+  min-height: 40vh;
+  max-height: 500px;
   padding-top: 64px;
   display: flex;
   align-items: center;
@@ -1010,11 +1010,87 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   display: none;
 }
 
+.hero-banner__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
 .hero-banner__content {
   position: relative;
   z-index: 2;
-  max-width: 620px;
+  max-width: 560px;
 }
+
+/* Right panel — featured collection */
+.hero-banner__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.hero-panel__label {
+  font-family: var(--font-subhead);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--color-accent);
+  margin: 0;
+}
+.hero-panel__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+.hero-panel__item {
+  position: relative;
+  display: block;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(17,17,17,0.6);
+  text-decoration: none;
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+  aspect-ratio: 1;
+}
+.hero-panel__item:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+.hero-panel__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hero-panel__item-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.4rem 0.5rem;
+  font-family: var(--font-subhead);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(transparent, rgba(0,0,0,0.75));
+}
+.hero-panel__more {
+  font-family: var(--font-subhead);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  text-decoration: none;
+  align-self: flex-end;
+}
+.hero-panel__more:hover { text-decoration: underline; }
 
 .hero-banner__eyebrow {
   font-size: 0.75rem;
@@ -3328,7 +3404,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 /* --------------------------------------------------------------------------
    WEAPON CATEGORIES — Guns + Melee icon rows
    -------------------------------------------------------------------------- */
-.weapon-categories { padding-top: 0.75rem; padding-bottom: 2rem; background: transparent; position: relative; }
+.weapon-categories { padding-top: 2.5rem; padding-bottom: 2rem; background: transparent; position: relative; }
 .weapon-categories::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.52) 18%); pointer-events: none; z-index: 0; }
 .weapon-categories .container { position: relative; z-index: 1; }
 .weapon-categories .wc-group { margin-bottom: 1rem; }

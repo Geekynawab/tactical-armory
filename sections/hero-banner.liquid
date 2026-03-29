@@ -1,5 +1,5 @@
 <section class="hero-banner" id="hero-banner-{{ section.id }}">
-  <!-- Static background image -->
+  <!-- Background image -->
   <div class="hero-banner__slideshow" aria-hidden="true">
     <div class="hero-banner__slide active">
       {%- if section.settings.bg_image != blank -%}
@@ -22,34 +22,63 @@
   <div class="hero-banner__overlay"></div>
 
   <div class="container">
-    <div class="hero-banner__content">
+    <div class="hero-banner__inner">
 
-      {%- if section.settings.eyebrow != blank -%}
-        <p class="hero-banner__eyebrow">{{ section.settings.eyebrow }}</p>
-      {%- endif -%}
-
-      {%- if section.settings.heading != blank -%}
-        <h1 class="hero-banner__title glitch" data-text="{{ section.settings.heading | split: '|' | join: '' | strip_html }}">
-          {%- assign title_parts = section.settings.heading | split: '|' -%}
-          {%- if title_parts.size > 1 -%}
-            {{ title_parts[0] }}<em>{{ title_parts[1] }}</em>{{ title_parts[2] }}
-          {%- else -%}
-            {{ section.settings.heading }}
-          {%- endif -%}
-        </h1>
-      {%- endif -%}
-
-      {%- if section.settings.subtitle != blank -%}
-        <p class="hero-banner__subtitle">{{ section.settings.subtitle }}</p>
-      {%- endif -%}
-
-      <div class="hero-banner__actions">
-        {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
-          <a href="{{ section.settings.cta_link }}" class="btn btn--primary">
-            {{ section.settings.cta_label }}
-          </a>
+      <!-- Left: Text content -->
+      <div class="hero-banner__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="hero-banner__eyebrow">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h1 class="hero-banner__title glitch" data-text="{{ section.settings.heading | split: '|' | join: '' | strip_html }}">
+            {%- assign title_parts = section.settings.heading | split: '|' -%}
+            {%- if title_parts.size > 1 -%}
+              {{ title_parts[0] }}<em>{{ title_parts[1] }}</em>{{ title_parts[2] }}
+            {%- else -%}
+              {{ section.settings.heading }}
+            {%- endif -%}
+          </h1>
+        {%- endif -%}
+
+        {%- if section.settings.subtitle != blank -%}
+          <p class="hero-banner__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+
+        <div class="hero-banner__actions">
+          {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
+            <a href="{{ section.settings.cta_link }}" class="btn btn--primary">
+              {{ section.settings.cta_label }}
+            </a>
+          {%- endif -%}
+        </div>
       </div>
+
+      <!-- Right: Featured collection panel -->
+      {%- if section.settings.featured_collection != blank -%}
+        {%- assign feat = collections[section.settings.featured_collection] -%}
+        {%- if feat != blank -%}
+          <div class="hero-banner__panel">
+            <p class="hero-panel__label">{{ feat.title | upcase }}</p>
+            <div class="hero-panel__grid">
+              {%- for product in feat.products limit: 4 -%}
+                <a href="{{ product.url }}" class="hero-panel__item">
+                  {%- if product.featured_image -%}
+                    <img
+                      src="{{ product.featured_image | image_url: width: 300 }}"
+                      alt="{{ product.title | escape }}"
+                      loading="lazy"
+                      width="300"
+                      height="300">
+                  {%- endif -%}
+                  <span class="hero-panel__item-title">{{ product.title }}</span>
+                </a>
+              {%- endfor -%}
+            </div>
+            <a href="{{ feat.url }}" class="hero-panel__more">View all &rarr;</a>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
 
     </div>
   </div>
@@ -96,26 +125,18 @@
       "label": "Primary button link"
     },
     {
-      "type": "text",
-      "id": "cta2_label",
-      "label": "Secondary button text",
-      "default": "Browse Collections"
-    },
-    {
-      "type": "url",
-      "id": "cta2_link",
-      "label": "Secondary button link"
+      "type": "collection",
+      "id": "featured_collection",
+      "label": "Featured collection (right panel)"
     }
   ],
   "presets": [
     {
       "name": "Hero Banner",
       "settings": {
-        "eyebrow": "New Collection",
         "heading": "Your Favorite Skins, |IRL|",
         "subtitle": "Premium physical replicas of Valorant's most iconic weapon skins. Crafted for real-world carry.",
-        "cta_label": "Shop All Skins",
-        "cta2_label": "Browse Collections"
+        "cta_label": "Shop All Skins"
       }
     }
   ]
