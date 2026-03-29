@@ -3371,19 +3371,10 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   flex: 0 0 88px;
 }
 
-/* Featured row — exactly 3 items centered, larger */
-.wc-group__grid--featured {
-  margin-bottom: 0.4rem;
+/* Guns — single row, slightly wider cards */
+.wc-group__grid--guns .wc-item {
+  flex: 0 0 110px;
 }
-.wc-group__grid--featured .wc-item {
-  flex: 0 0 150px;
-}
-.wc-item--featured {
-  height: 80px;
-  border-color: rgba(239,68,68,0.25);
-}
-.wc-item--featured .wc-item__name { font-size: 0.72rem; }
-.wc-item--featured:hover { border-color: var(--color-accent); }
 
 .wc-item {
   position: relative;
@@ -3422,6 +3413,13 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 .wc-item:hover .wc-item__icon { color: var(--color-text-primary); }
 .wc-item--melee .wc-item__icon { color: var(--color-text-muted); }
 .wc-item:hover.wc-item--melee .wc-item__icon { color: var(--color-accent-teal); }
+
+/* Per-weapon icon padding — normalise apparent size to match Phantom */
+.wc-item--sheriff .wc-item__icon  { padding: 18px; }
+.wc-item--classic .wc-item__icon  { padding: 14px; }
+.wc-item--spectre .wc-item__icon  { padding: 10px; }
+.wc-item--vandal  .wc-item__icon  { padding: 6px; }
+.wc-item--guardian .wc-item__icon { padding: 2px; }
 
 .wc-item__name {
   position: absolute;
