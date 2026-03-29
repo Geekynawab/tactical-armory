@@ -31,6 +31,10 @@
       },
       "blocks_order": ["cat-1","cat-2","cat-3","cat-4","cat-5","cat-6","cat-7","cat-8"]
     },
+    "trust-bar": {
+      "type": "trust-bar",
+      "settings": {}
+    },
     "flash-sales": {
       "type": "featured-collection",
       "settings": {
@@ -124,6 +128,7 @@
     "hero-banner",
     "weapon-categories",
     "collection-categories",
+    "trust-bar",
     "flash-sales",
     "collections-showcase",
     "bestsellers",

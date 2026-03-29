@@ -1189,7 +1189,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 .trust-bar {
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
-  padding: 2.5rem 0;
+  padding: 1rem 0;
   background: var(--color-bg-secondary);
 }
 .trust-bar__grid {
