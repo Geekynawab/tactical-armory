@@ -3398,7 +3398,7 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   text-decoration: none;
   color: #ffffff;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
-  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  border-radius: 10px;
 }
 .wc-item:hover {
   border-color: #ffffff;
