@@ -1024,6 +1024,11 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   position: relative;
   z-index: 2;
   max-width: 560px;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 12px;
+  padding: 2rem 2rem 1.75rem;
 }
 
 /* Right panel — featured collection */
@@ -1112,12 +1117,11 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 }
 
 .hero-banner__title {
-  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
   font-weight: 900;
   letter-spacing: 0.04em;
   line-height: 1.05;
   margin-bottom: 1.25rem;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.95), 0 4px 24px rgba(0,0,0,0.8);
 }
 .hero-banner__title em {
   font-style: normal;
@@ -1126,11 +1130,10 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 
 .hero-banner__subtitle {
   font-family: var(--font-subhead);
-  font-size: 0.9rem;
+  font-size: 1.05rem;
   font-weight: 400;
-  letter-spacing: 0.06em;
-  color: rgba(255,255,255,0.92);
-  text-shadow: 0 1px 4px rgba(0,0,0,0.95), 0 2px 16px rgba(0,0,0,0.8);
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.95);
   margin-bottom: 2rem;
   max-width: 480px;
   line-height: 1.7;
