@@ -3328,7 +3328,9 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 /* --------------------------------------------------------------------------
    WEAPON CATEGORIES — Guns + Melee icon rows
    -------------------------------------------------------------------------- */
-.weapon-categories { padding-top: 0.75rem; padding-bottom: 2rem; background: transparent; }
+.weapon-categories { padding-top: 0.75rem; padding-bottom: 2rem; background: transparent; position: relative; }
+.weapon-categories::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.52) 18%); pointer-events: none; z-index: 0; }
+.weapon-categories .container { position: relative; z-index: 1; }
 .weapon-categories .wc-group { margin-bottom: 1rem; }
 .weapon-categories .wc-group:last-child { margin-bottom: 0; }
 
@@ -3369,11 +3371,17 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
   flex: 0 0 130px;
 }
 
+@keyframes wc-pop {
+  from { opacity: 0; transform: translateY(22px) scale(0.94); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
 .wc-item {
   position: relative;
   overflow: hidden;
   height: 85px;
   background: var(--color-accent);
+  animation: wc-pop 0.4s ease both;
   border: 2px solid #ffffff;
   text-decoration: none;
   color: #ffffff;
@@ -3417,6 +3425,14 @@ h4 { font-family: var(--font-subhead); font-size: 1.125rem; }
 .wc-item__name { display: none; }
 
 .wc-item__type { display: none; }
+
+/* Staggered pop-in delays */
+.wc-group__grid .wc-item:nth-child(1) { animation-delay: 0.05s; }
+.wc-group__grid .wc-item:nth-child(2) { animation-delay: 0.12s; }
+.wc-group__grid .wc-item:nth-child(3) { animation-delay: 0.19s; }
+.wc-group__grid .wc-item:nth-child(4) { animation-delay: 0.26s; }
+.wc-group__grid .wc-item:nth-child(5) { animation-delay: 0.33s; }
+.wc-group__grid .wc-item:nth-child(6) { animation-delay: 0.40s; }
 
 @media (max-width: 600px) {
   .wc-group__grid { grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 0.4rem; }
