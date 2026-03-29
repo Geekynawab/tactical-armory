@@ -3,7 +3,7 @@
     "hero-banner": {
       "type": "hero-banner",
       "settings": {
-        "eyebrow": "New Collection",
+        "eyebrow": "",
         "heading": "Your Favorite Skins, |IRL|",
         "subtitle": "Valorant-inspired melee knives and weapon keychains. Crafted for collectors, built to carry.",
         "cta_label": "Shop All",
