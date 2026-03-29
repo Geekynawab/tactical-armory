@@ -2,12 +2,21 @@
   <!-- Static background image -->
   <div class="hero-banner__slideshow" aria-hidden="true">
     <div class="hero-banner__slide active">
-      <img
-        src="{{ 'pheonix.png' | asset_url }}"
-        alt=""
-        loading="eager"
-        width="1600"
-        height="900">
+      {%- if section.settings.bg_image != blank -%}
+        <img
+          src="{{ section.settings.bg_image | image_url: width: 1600 }}"
+          alt=""
+          loading="eager"
+          width="1600"
+          height="900">
+      {%- else -%}
+        <img
+          src="{{ 'pheonix.png' | asset_url }}"
+          alt=""
+          loading="eager"
+          width="1600"
+          height="900">
+      {%- endif -%}
     </div>
   </div>
   <div class="hero-banner__overlay"></div>
